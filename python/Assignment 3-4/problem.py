@@ -14,12 +14,16 @@ def validate_data(ap_id, type_e, amount, type_list): # Validate input data
         return "Type of expense is not on the list!"
     return None
 
+
 def create_apartment(ap_id, type_e, amount): #Create an apartment
     return{"ap_id":ap_id, type_e:amount}
 
 
 
 def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
+    '''
+    If apartment is valid it can be added to the list
+    '''
     msg = validate_data(ap_id, type_e, amount, type_list)
     if msg is not None:
         print(msg)
@@ -28,29 +32,37 @@ def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
         apartmentList.append(apartment)
 
 
-
+#Getter functions
 def get_ap_id(apartment):
     return apartment["ap_id"]
-
-def get_ap_amount_for_type(apartment, type_e):
+def get_ap_amount_for_type(apartment, type_e): #Get the amount of money to be payed for a known expense
     try:
         return apartment[type_e]
     except:
         return 0
-    
-def get_total_expenses(apartment, type_e):
-    sum = 0 
+def get_total_expenses(apartment, type_e): #Get the total amount of money to be payed assigned to an apartment
+    sum = 0
     for i in type_e:
         sum += get_ap_amount_for_type(apartment, i)
     return sum
+#Getter functions end
 
 
-def set_apartment_expense(apartment, type_e, amount): #Set the expense amount
-        apartment[type_e] = amount
+#Set functions
+def set_apartment_expense(apartment, type_e, expenses, amount): #Set the expense amount
+        ok = 0
+        for a in expenses:
+            if a == type_e:
+                ok = 1
+        if ok == 1:
+            apartment[type_e] = amount
+        else:
+            print_type_error()
+
+#Set functions end
 
 
-
-def init_apartments(): #Initialize apartments
+def init_apartments(): #Initialize apartments list
     res = []
     res.append(create_apartment(25, "gas", 100))
     res.append(create_apartment(24, "gas", 131))
@@ -64,7 +76,7 @@ def init_apartments(): #Initialize apartments
     return res
 
 
-def init_expenses(): #Initialize expenses types
+def init_expenses(): #Initialize expenses list
     res = []
     res.append("gas")
     res.append("water")
@@ -74,39 +86,64 @@ def init_expenses(): #Initialize expenses types
     return res
 
 def  add_apartment_expense_ui(apartments, params,type_list):
+    '''
+    Input - list of apartments, parameters given by user, expenses list
+    Output - Nothing
+    The function adds the apartment to the list if is not already there, or appends to the apartment a new expense
+    '''
     if len(params) != 3:
-        print("Bad apartment parameters!")
+        print_adding_error()
         return
-
     ok = 0
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
-            set_apartment_expense(ap, params[1], int(get_ap_amount_for_type(ap, params[1])) + int(params[2]))
-            ok = 1  
-    if ok == 0:        
+            try:
+                set_apartment_expense(ap, params[1], type_list, int(get_ap_amount_for_type(ap, params[1])) + int(params[2]))
+            except:
+                print_adding_error()
+            ok = 1
+    if ok == 0:
         add_apartment(int(params[0]), params[1], int(params[2]), type_list, apartments)
 
-        
+
+
 def replace_apartment_ui(apartments,params, type_list):
+    '''
+    If the apartment exists in the list and the expense is in the expenses list too, it will update the amount of money to be paid
+    for that expense
+    '''
+    ok = 0
     if len(params) != 4:
        print_replace_error()
        return
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
-            set_apartment_expense(ap, params[1], int(params[3]))
+            set_apartment_expense(ap, params[1], type_list, int(params[3]))
+            ok = 1
+    if ok == 0:
+        print_apartment_error()
 
-
+#Error printing functions
+def print_type_error():
+    print("The expense is not in the list!")
+def print_apartment_error():
+    print("Apartment is not in the list, so the expense can't be replaced!")
+def print_adding_error():
+    print("Bad apartment parameters!")
 def print_remove_error():
     print("Bad remove parameters!")
-
 def print_replace_error():
     print("Bad replacement parameters!")
-
 def print_list_error():
     print("Invalid listing parameters!")
+#Error printing functions end
 
 
 def remove_apartments(apartments, start, end):
+    '''
+    The parameters start, end are given by user and if they are valid ->
+    ->  Remove apartments from the list with the id >= start and <= end
+    '''
     ok = 0
     for i in range(len(apartments)):
       if int(get_ap_id(apartments[i])) >= start and int(get_ap_id(apartments[i])) <= end:
@@ -117,6 +154,13 @@ def remove_apartments(apartments, start, end):
         remove_apartments(apartments, start, end)
 
 def remove_apartment_ui(apartments, params, expenses):
+    '''
+    Here the command "remove" given by user is processed
+    1.remove an expense from the list
+    2.remove an apartment
+    3.remove more than one apartments
+    The parameters are validated first
+    '''
     if len(params) == 1:
         try:
             index = expenses.index(params[0])
@@ -141,6 +185,10 @@ def remove_apartment_ui(apartments, params, expenses):
 
 
 def print_apartments(apartments, type_list, start, end):
+    '''
+    Print the list of apartments with the id >= start and <= end
+    If there is no apartment with such an id, there is a message to show this
+    '''
     print("**********************")
     if len(apartments) == 0:
         print("There are no apartments in the list!")
@@ -170,6 +218,10 @@ def print_apartments(apartments, type_list, start, end):
 
 
 def print_apartments_expense(apartments, expenses, comparison, amount):
+    '''
+    Print a list of apartments where the total expenses are in a relation of <,= or > than the amount given by the user
+    If there is no apartment to have this property, there is a message to show this
+    '''
     print("**********************")
     ok = 0
     if comparison == '<':
@@ -190,11 +242,18 @@ def print_apartments_expense(apartments, expenses, comparison, amount):
                 print("Apartment id: " + str(get_ap_id(ap)) + " Total: " + str(get_total_expenses(ap, expenses)))
     else:
         print_list_error()
-    print("**********************")            
-             
-    
+    print("**********************")
+
+
 
 def print_apartments_ui(apartments, params, type_list):
+    '''
+    The command 'list' is processed:
+    1. It prints a list of apartments with ids between 2 boundaries
+    2. It prints a list of apartments with the total expense in a relation of <,= or > than an amount given by a user
+    3. It prints only an apartment
+    Also, the command inputed by the user is valided
+    '''
     if int(len(params)) == 3:
         try:
             print_apartments(apartments, type_list, int(params[0]), int(params[2]))
@@ -216,6 +275,7 @@ def print_apartments_ui(apartments, params, type_list):
           print("Invalid parameters!")
 
 def print_help_menu():
+    print("**********************")
     print("1. Add a new transaction to the list.")
     print("add <apartment> <type> <amount>")
     print("e.g.")
@@ -239,6 +299,7 @@ def print_help_menu():
     print("list 15 – write all expenses for apartment 15.")
     print("list > 100 - write all the apartments having total expenses > 100 RON.")
     print("list = 17 - write all the apartments having total expenses = 17 RON.")
+    print("**********************")
 
 
 def readCommand(): #Read and parse the user's command
