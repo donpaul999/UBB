@@ -14,6 +14,13 @@ def validate_data(ap_id, type_e, amount, type_list): # Validate input data
         return "Type of expense is not on the list!"
     return None
 
+def validate_expense(expense, expenses): #Verify if the expense is on the list
+    for e in expenses:
+        if e == expense:
+            return 1
+    print_type_error()
+    return None 
+
 
 def create_apartment(ap_id, type_e, amount): #Create an apartment
     return{"ap_id":ap_id, type_e:amount}
@@ -22,8 +29,8 @@ def create_apartment(ap_id, type_e, amount): #Create an apartment
 
 def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
     '''
-    If apartment is valid it can be added to the list
-    '''
+    If apartment is vaalid it can be added to the list
+    ''' 
     msg = validate_data(ap_id, type_e, amount, type_list)
     if msg is not None:
         print(msg)
@@ -49,16 +56,8 @@ def get_total_expenses(apartment, type_e): #Get the total amount of money to be 
 
 
 #Set functions
-def set_apartment_expense(apartment, type_e, expenses, amount): #Set the expense amount
-        ok = 0
-        for a in expenses:
-            if a == type_e:
-                ok = 1
-        if ok == 1:
-            apartment[type_e] = amount
-        else:
-            print_type_error()
-
+def set_apartment_expense(apartment, type_e, amount): #Set the money to be payed(amount) by the apartment for an expense(type_e)
+    apartment[type_e] = amount
 #Set functions end
 
 
@@ -85,7 +84,7 @@ def init_expenses(): #Initialize expenses list
     res.append("other")
     return res
 
-def  add_apartment_expense_ui(apartments, params,type_list):
+def add_apartment_expense_ui(apartments, params,type_list):
     '''
     Input - list of apartments, parameters given by user, expenses list
     Output - Nothing
@@ -95,13 +94,14 @@ def  add_apartment_expense_ui(apartments, params,type_list):
         print_adding_error()
         return
     ok = 0
-    for ap in apartments:
-        if int(get_ap_id(ap)) == int(params[0]):
-            try:
-                set_apartment_expense(ap, params[1], type_list, int(get_ap_amount_for_type(ap, params[1])) + int(params[2]))
-            except:
-                print_adding_error()
-            ok = 1
+    if validate_expense(params[1], type_list) == 1:
+        for ap in apartments:
+            if int(get_ap_id(ap)) == int(params[0]):
+                try:
+                    set_apartment_expense(ap, params[1], int(get_ap_amount_for_type(ap, params[1])) + int(params[2]))
+                except:
+                    print_adding_error()
+                ok = 1
     if ok == 0:
         add_apartment(int(params[0]), params[1], int(params[2]), type_list, apartments)
 
@@ -118,7 +118,8 @@ def replace_apartment_ui(apartments,params, type_list):
        return
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
-            set_apartment_expense(ap, params[1], type_list, int(params[3]))
+            if validate_expense(params[1], type_list) == 1:
+                set_apartment_expense(ap, params[1], type_list, int(params[3]))
             ok = 1
     if ok == 0:
         print_apartment_error()
@@ -127,7 +128,7 @@ def replace_apartment_ui(apartments,params, type_list):
 def print_type_error():
     print("The expense is not in the list!")
 def print_apartment_error():
-    print("Apartment is not in the list, so the expense can't be replaced!")
+    print("Apartment is not in the list!")
 def print_adding_error():
     print("Bad apartment parameters!")
 def print_remove_error():
@@ -136,9 +137,82 @@ def print_replace_error():
     print("Bad replacement parameters!")
 def print_list_error():
     print("Invalid listing parameters!")
+def print_sum_error():
+    print("Invalid sum parameters!")
+def print_max_error():
+    print("Invalid max parameters!")
+
 #Error printing functions end
 
+def sum_expense(apartments, expense):
+    '''
+    Input - list of apartments
+          - an expense from the list
+    Output- returns sum of the amounts from apartments for the expense sent as parameter
+    '''
+    sum = 0
+    for ap in apartments:
+        sum += get_ap_amount_for_type(ap, expense)
+    return sum  
 
+def sum_expense_ui(apartments, param, expenses):
+    '''
+    Input - list of apartments
+          - list of parameters sent by user
+          - list of expenses
+    Output- prints the sum of the amounts from the apartments for the expense sent as parameter(if the data is valid)
+    '''
+    if len(param) != 1:
+        print_sum_error()
+    else:
+        if validate_expense(param[0], expenses) == 1:
+            print("The sum for " + param[0] + " is: " + str(sum_expense(apartments, param[0])))
+
+
+def max_expense(apartment, expenses):
+    '''
+    Input - an apartment given by user
+          - list of expenses
+    Output- return the maximum expense for the apartment given by user
+    '''
+    maxi = 0
+    max_ex = 0
+    for ex in expenses:
+       if get_ap_amount_for_type(apartment, ex) > maxi:
+           maxi = get_ap_amount_for_type(apartment, ex)
+           max_ex = ex
+    if maxi == 0:
+        return "There is no amount of money to be payed by this apartment"
+    else:
+        return str(max_ex) + ": " + str(maxi) 
+
+def max_expense_ui(apartments, params, expenses):
+    '''
+    Input - list of apartments
+          - parameters given by user
+          - list of expenses
+    Output- prints the the maximum expense for the apartment given by user(if the data is valid)
+    '''
+    if len(params) != 1:
+        print_max_error()
+    else:
+        ok = 0
+        try:
+            int(params[0])
+        except:
+           print_max_error()
+           return
+        for i in apartments:
+            if int(get_ap_id(i)) == int(params[0]):
+                ok = 1
+                break
+        if ok == 1:
+            print(max_expense(i, expenses))
+        else:
+            print_apartment_error()
+
+            
+            
 def remove_apartments(apartments, start, end):
     '''
     The parameters start, end are given by user and if they are valid ->
@@ -319,6 +393,8 @@ def readCommand(): #Read and parse the user's command
     return (command, params)
 
 
+
+
 def start():
     apartments = init_apartments()
     expenses = init_expenses()
@@ -336,6 +412,10 @@ def start():
             remove_apartment_ui(apartments, params, expenses)
         elif cmd == 'help':
             print_help_menu()
+        elif cmd == "sum":
+            sum_expense_ui(apartments, params, expenses)
+        elif cmd == "max":
+            max_expense_ui(apartments, params, expenses)
         elif cmd == 'exit':
             break
         else:
