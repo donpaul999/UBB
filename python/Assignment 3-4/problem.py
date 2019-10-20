@@ -29,7 +29,7 @@ def create_apartment(ap_id, type_e, amount): #Create an apartment
 
 def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
     '''
-    If apartment is vaalid it can be added to the list
+    If apartment is valid it can be added to the list
     ''' 
     msg = validate_data(ap_id, type_e, amount, type_list)
     if msg is not None:
@@ -37,6 +37,18 @@ def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
     else:
         apartment = create_apartment(ap_id, type_e, amount)
         apartmentList.append(apartment)
+
+
+def test_add_apartment():
+    aplist = []
+    ap = create_apartment(39, "gas", 100)
+    aplist.append(ap)
+    assert get_ap_id(ap) == 39
+    assert get_ap_amount_for_type(ap, "gas") == 100
+    assert get_ap_amount_for_type(ap, "water") == 0
+    assert len(aplist) == 1
+
+
 
 
 #Getter functions
@@ -421,4 +433,5 @@ def start():
         else:
             print("Invalid command!")
 
+test_add_apartment()
 start()
