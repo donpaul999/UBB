@@ -13,8 +13,8 @@ segment data use32 class=data
     ; ...
     a DB 6
     b DW 5
-    c DD 10
-    d DQ 15
+    c Db 10
+    d Db 15
 ; our code starts here
 segment code use32 class=code
     start:
@@ -22,9 +22,12 @@ segment code use32 class=code
         mov AL, [d] 
         add AL, [d]
         sub AL, [b]
+            
         mov BL, [c]
         sub BL, [a]
+        
         add AL, BL
+        
         add AL, [d]     ;AL = 44
         ; exit(0)
         push    dword 0      ; push the parameter for exit onto the stack

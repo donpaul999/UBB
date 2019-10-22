@@ -17,3 +17,34 @@ function calls:
     functions -> domain
 
 '''
+def add_circle_ui():
+    pass
+
+def show_circles_ui():
+    pass
+
+def printMenu():
+    print("1. Add circle")
+   #print("2. Delete circle")
+    print("3. Show circles")
+    print("0. Exit")
+
+def start():
+    circles = []
+    # ~command design pattern
+    commands = {'1':add_circle_ui, '3':show_circles_ui}
+    
+    
+    while True:
+        printMenu()
+        cmd = input("command: ")
+        if cmd == '0':
+            return
+        if cmd in commands.keys():
+            commands[cmd]()
+        else:
+            print("Bad command!")
+
+    
+
+start()

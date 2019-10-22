@@ -21,12 +21,16 @@ segment code use32 class=code
         ; ...
         mov AL, [a]
         add AL, [b]
+        
         mov BL, [a]
         add BL, [c]
+        
         mov CL, [c]
         add CL, [b]
+        
         add AL, BL
         add AL, CL
+        
         sub AL, [d] ;AL = 27
         
         ; exit(0)

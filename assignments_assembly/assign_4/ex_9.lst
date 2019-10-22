@@ -1,0 +1,59 @@
+     1                                  ;Given the word A and the byte B, compute the doubleword C as follows:
+     2                                  ;the bits 0-3 of C are the same as the bits 6-9 of A
+     3                                  ;the bits 4-5 of C have the value 1
+     4                                  ;the bits 6-7 of C are the same as the bits 1-2 of B
+     5                                  ;the bits 8-23 of C are the same as the bits of A
+     6                                  ;the bits 24-31 of C are the same as the bits of B
+     7                                  
+     8                                  bits 32 ; assembling for the 32 bits architecture
+     9                                  
+    10                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+    11                                  global start        
+    12                                  
+    13                                  ; declare external functions needed by our program
+    14                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+    15                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    16                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    17                                  
+    18                                  ; our data is declared here (the variables needed by our program)
+    19                                  segment data use32 class=data
+    20                                      ; ...
+    21 00000000 5777                         a dw 0111011101010111b
+    22 00000002 BE                           b db 10111110b
+    23 00000003 00000000                     c dd 0
+    24                                  ; our code starts here
+    25                                  segment code use32 class=code
+    26                                      start:
+    27                                          ; ...
+    28 00000000 66B80000                        mov AX, 0
+    29                                          
+    30 00000004 668B1D[00000000]                mov BX, [a]
+    31 0000000B 6681E3C003                      and BX, 00000000000000000000001111000000b
+    32 00000010 B106                            mov CL, 6
+    33 00000012 66D3CB                          ror BX, CL
+    34 00000015 6609D8                          or AX, BX
+    35                                          
+    36 00000018 6683C830                        or AX,00000000000000000000000000110000b
+    37                                          
+    38 0000001C 668B1D[02000000]                mov BX, [b]
+    39 00000023 6683E306                        and BX, 00000000000000000000000000000110b
+    40 00000027 B104                            mov CL, 4
+    41 00000029 66D3C3                          rol BX, CL
+    42 0000002C 6609D8                          or AX, BX
+    43                                          
+    44 0000002F 668B1D[00000000]                mov BX, [a]
+    45 00000036 6681E300FF                      and BX, 00000000111111111111111100000000b
+    45          ******************       warning: word data exceeds bounds [-w+number-overflow]
+    46 0000003B 6609D8                          or AX, BX
+    47                                                  
+    48 0000003E 668B1D[02000000]                mov BX, [b]
+    49 00000045 6683E300                        and BX, 11111111000000000000000000000000b
+    49          ******************       warning: word value exceeds bounds [-w+number-overflow]
+    50 00000049 6609D8                          or AX, BX
+    51                                          
+    52                                          
+    53                                          
+    54                                          
+    55                                          ; exit(0)
+    56 0000004C 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    57 0000004E FF15[00000000]                  call    [exit]       ; call exit to terminate the program
