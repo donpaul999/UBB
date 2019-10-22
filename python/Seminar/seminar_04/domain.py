@@ -16,7 +16,7 @@ def create_circle(x,y,r):
     if r <= 0:
         raise ValueError("Radius < 0!")
     if x < r or y < r:
-        raise ValueError("CIrcle not in 1st quadrant!")
+        raise ValueError("Circle not in 1st quadrant!")
     
 
     return [x,y,r]
@@ -26,8 +26,17 @@ def get_x(c):
     return c[0]
 def get_y(c):
     return c[1]
-def get_z(c):
+def get_r(c):
     return c[2]
+
+#We can't print stuff here, so we convert to a string
+#starts to look similar to python's own str() function      
+def tostr(c):
+    return(print("("+str(get_x(c)) + "," + str(get_y(c)) + "), r= " + str(get_r(c))))
+
+def test_tostr():
+    c = create_circle(2,2,1)
+   # assert tostr(c) = '(2,2), r= 1'
 
 #1. Write function specification
 #2. Write a test function
@@ -35,11 +44,18 @@ def get_z(c):
 #4. Write function code 
 #5. Run test function => it should pass (repeat 3-5)
 #6. Optimize!
+def test_init():
+    circles = []
+    circles.append(create_circle(1,1,1))
+    circles.append(create_circle(2,1,1))
+    circles.append(create_circle(3,1,1))
+    circles.append(create_circle(1,1,1))
+    return circles
 
 def test_create_circle():
     #nice circle
     c = create_circle(1,1,1)
-    assert get_x(c) == 1 and get_z(c) == 1 and get_y(c) == 1 
+    assert get_x(c) == 1 and get_r(c) == 1 and get_y(c) == 1 
     # radius < 0
     try:
         c = create_circle(1,1,-1)
