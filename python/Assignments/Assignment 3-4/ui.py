@@ -1,4 +1,5 @@
 #APARTMENT BUILDING ADMINISTRATOR - UI
+from copy import deepcopy
 from domain import *
 from functions import *
 
@@ -34,13 +35,15 @@ def replace_apartment_ui(apartments,params, type_list, history):
     if len(params) != 4 or params[2] != 'with':
        print_replace_error()
        return
-    history.append(apartments[:])
+    history.append(deepcopy(apartments[:]))
+    print(history)
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
             if validate_expense(params[1], type_list) == 1:
                 set_total_expenses(ap, (-1) * get_ap_amount_for_type(ap, params[1]))
                 set_apartment_expense(ap, params[1],  int(params[3]))
             ok = 1
+    print(history)
     if ok == 0:
         history.pop()
         print_apartment_error()
@@ -209,7 +212,7 @@ def remove_apartment_ui(apartments, params, expenses, history):
     3.remove more than one apartments
     The parameters are validated first
     '''
-    history.append(apartments[:])
+    history.append(deepcopy(apartments[:]))
     ok = 0
     if len(params) == 1:
         if validate_expense(params[0], expenses) == 1:
@@ -238,7 +241,7 @@ def remove_apartment_ui(apartments, params, expenses, history):
 
 def sort_ui(apartments, params, expenses, history):
     ok = 0
-    history.append(apartments[:])
+    history.append(deepcopy(apartments[:]))
     if len(params) != 1 or params[0] != 'type' and params[0] != 'apartment':
         print_sort_error()
         return
@@ -255,7 +258,7 @@ def sort_ui(apartments, params, expenses, history):
 
 def filter_ui(apartments, params, expenses, history):
     ok = 0
-    history.append(apartments[:])
+    history.append(deepcopy(apartments[:]))
     if len(params) != 1:
         print_filter_error()
         return
