@@ -89,3 +89,20 @@ def sort_type(apartments, expenses):
         list.append(el)
     list = sorted(list, key = lambda i: i["total"])
     return list
+
+def filter_type(apartments, expense, type_e):
+    for e in type_e:
+        if e != expense:
+            for i in apartments:
+                set_total_expenses(i, (-1) * get_ap_amount_for_type(i, e))
+                set_apartment_expense(i,e, 0)
+    return apartments
+
+def filter_amount(apartments, amount, expenses):
+    for i in apartments:
+        for e in expenses:
+            if get_ap_amount_for_type(i, e) > amount:
+                set_total_expenses(i, (-1) * get_ap_amount_for_type(i, e))
+                set_apartment_expense(i,e, 0)
+    return apartments
+ 

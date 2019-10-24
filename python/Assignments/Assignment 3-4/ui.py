@@ -62,6 +62,8 @@ def print_max_error():
     print("Invalid max parameters!")
 def print_sort_error():
     print("Invalid sorting parameters!")
+def print_filter_error():
+    print("Invalid filter parameters!")
 #Error printing functions end
 
 def sum_expense_ui(apartments, param, expenses):
@@ -238,6 +240,21 @@ def sort_ui(apartments, params, expenses):
         expenses_dict = sort_type(apartments, expenses)
         print_list(expenses_dict)
 
+
+def filter_ui(apartments, params, expenses):
+    if len(params) != 1:
+        print_filter_error()
+        return
+    if validate_expense(params[0], expenses) == 1:
+        apartments = filter_type(apartments, params[0], expenses)
+        print_apartments(apartments, expenses, -1, -1)
+    else:
+        try:
+         apartments = filter_amount(apartments, int(params[0]), expenses)
+         print_apartments(apartments, expenses, -1, -1)
+        except:
+          print_filter_error()
+
 def print_list(list):
     for e in list:
         print(e["expense"] + " Total: " + str(e["total"]))
@@ -312,6 +329,8 @@ def start():
             max_expense_ui(apartments, params, expenses)
         elif cmd == "sort":
             sort_ui(apartments, params, expenses)
+        elif cmd == "filter":
+            filter_ui(apartments, params, expenses)
         elif cmd == 'exit':
             break
         else:
