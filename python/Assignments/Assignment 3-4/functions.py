@@ -78,3 +78,14 @@ def remove_apartments(apartments, start, end):
     if ok == 1:
         remove_apartments(apartments, start, end)
 
+def sort_apartment(apartments, expenses):
+    apartments = sorted(apartments, key = lambda i: i["total"])
+    return apartments
+
+def sort_type(apartments, expenses):
+    list = []
+    for e in expenses:
+        el = {"expense": e, "total": get_total_expense_amount(apartments, e)}
+        list.append(el)
+    list = sorted(list, key = lambda i: i["total"])
+    return list

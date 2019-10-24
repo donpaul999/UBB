@@ -22,12 +22,20 @@ def validate_expense(expense, expenses): #Verify if the expense is on the list
 
 
 def create_apartment(ap_id, type_e, amount): #Create an apartment
-    return{"ap_id":ap_id, type_e:amount, "total": get_total_expenses(ap_id) + amount};
+    return{"ap_id":ap_id, type_e:amount, "total": get_total_expenses(ap_id) + amount}
 
 
 #Getter functions
 def get_ap_id(apartment):
     return apartment["ap_id"]
+def get_total_expense_amount(apartments, expense):
+    sum = 0
+    for i in apartments:
+        try:
+            sum += i[expense]
+        except:
+            sum += 0
+    return sum
 def get_ap_amount_for_type(apartment, type_e): #Get the amount of money to be payed for a known expense
     try:
         return apartment[type_e]

@@ -60,7 +60,8 @@ def print_sum_error():
     print("Invalid sum parameters!")
 def print_max_error():
     print("Invalid max parameters!")
-
+def print_sort_error():
+    print("Invalid sorting parameters!")
 #Error printing functions end
 
 def sum_expense_ui(apartments, param, expenses):
@@ -70,7 +71,7 @@ def sum_expense_ui(apartments, param, expenses):
           - list of expenses
     Output- prints the sum of the amounts from the apartments for the expense sent as parameter(if the data is valid)
     '''
-    if len(param) != 1:
+    if len(param) != 1 or validate_expense(param[0], expenses) is None:
         print_sum_error()
     else:
         if validate_expense(param[0], expenses) == 1:
@@ -210,7 +211,7 @@ def remove_apartment_ui(apartments, params, expenses):
         else:
             try:
                 for i in range(len(apartments)):
-                    if int(get_ap_id(apartments[i])) == int(params[0]):
+                    if int(get_ap_id(aparetments[i])) == int(params[0]):
                         del apartments[i]
                         break
             except:
@@ -226,6 +227,20 @@ def remove_apartment_ui(apartments, params, expenses):
     else:
         print_remove_error()
 
+def sort_ui(apartments, params, expenses):
+    if len(params) != 1 or params[0] != 'type' and params[0] != 'apartment':
+        print_sort_error()
+        return
+    if params[0] == 'apartment':
+        apartments = sort_apartment(apartments, expenses)
+        print_apartments(apartments, expenses, -1, -1)
+    else:
+        expenses_dict = sort_type(apartments, expenses)
+        print_list(expenses_dict)
+
+def print_list(list):
+    for e in list:
+        print(e["expense"] + " Total: " + str(e["total"]))
 
 def print_help_menu():
     print("**********************")
@@ -295,6 +310,8 @@ def start():
             sum_expense_ui(apartments, params, expenses)
         elif cmd == "max":
             max_expense_ui(apartments, params, expenses)
+        elif cmd == "sort":
+            sort_ui(apartments, params, expenses)
         elif cmd == 'exit':
             break
         else:
