@@ -11,7 +11,7 @@ def set_total_expenses(apartment, amount):
 #Set functions end
 
 
-def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
+def add_apartment(ap_id, type_e, amount, type_list, apartmentList, history):
     '''
     If apartment is valid it can be added to the list
     ''' 
@@ -19,8 +19,10 @@ def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
     if msg is not None:
         print(msg)
     else:
+        history.append(apartmentList[:])
         apartment = create_apartment(ap_id, type_e, amount)
         apartmentList.append(apartment)
+
 
 
 def test_add_apartment():
@@ -105,4 +107,8 @@ def filter_amount(apartments, amount, expenses):
                 set_total_expenses(i, (-1) * get_ap_amount_for_type(i, e))
                 set_apartment_expense(i,e, 0)
     return apartments
+
+def undo(apartments, history):
+    apartments.clear()
+    apartments.extend(history.pop())
  

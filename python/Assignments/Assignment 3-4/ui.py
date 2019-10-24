@@ -2,7 +2,7 @@
 from domain import *
 from functions import *
 
-def add_apartment_expense_ui(apartments, params,type_list):
+def add_apartment_expense_ui(apartments, params,type_list, history):
     '''
     Input - list of apartments, parameters given by user, expenses list
     Output - Nothing
@@ -21,11 +21,11 @@ def add_apartment_expense_ui(apartments, params,type_list):
                     print_adding_error()
                 ok = 1
     if ok == 0:
-        add_apartment(int(params[0]), params[1], int(params[2]), type_list, apartments)
+        add_apartment(int(params[0]), params[1], int(params[2]), type_list, apartments, history)
 
 
 
-def replace_apartment_ui(apartments,params, type_list):
+def replace_apartment_ui(apartments,params, type_list, history):
     '''
     If the apartment exists in the list and the expense is in the expenses list too, it will update the amount of money to be paid
     for that expense
@@ -34,6 +34,7 @@ def replace_apartment_ui(apartments,params, type_list):
     if len(params) != 4 or params[2] != 'with':
        print_replace_error()
        return
+    history.append(apartments[:])
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
             if validate_expense(params[1], type_list) == 1:
@@ -41,6 +42,7 @@ def replace_apartment_ui(apartments,params, type_list):
                 set_apartment_expense(ap, params[1],  int(params[3]))
             ok = 1
     if ok == 0:
+        history.pop()
         print_apartment_error()
 
 #Error printing functions
@@ -64,6 +66,8 @@ def print_sort_error():
     print("Invalid sorting parameters!")
 def print_filter_error():
     print("Invalid filter parameters!")
+def print_undo_error():
+    print("No more undos!")
 #Error printing functions end
 
 def sum_expense_ui(apartments, param, expenses):
@@ -197,7 +201,7 @@ def print_apartments_ui(apartments, params, type_list):
     else:
           print("Invalid parameters!")
 
-def remove_apartment_ui(apartments, params, expenses):
+def remove_apartment_ui(apartments, params, expenses, history):
     '''
     Here the command "remove" given by user is processed
     1.remove an expense from the list
@@ -205,6 +209,8 @@ def remove_apartment_ui(apartments, params, expenses):
     3.remove more than one apartments
     The parameters are validated first
     '''
+    history.append(apartments[:])
+    ok = 0
     if len(params) == 1:
         if validate_expense(params[0], expenses) == 1:
             for i in apartments:
@@ -212,52 +218,71 @@ def remove_apartment_ui(apartments, params, expenses):
                 set_apartment_expense(i,params[0], 0)
         else:
             try:
-                for i in range(len(apartments)):
-                    if int(get_ap_id(aparetments[i])) == int(params[0]):
-                        del apartments[i]
-                        break
+                remove_apartments(apartments, int(params[0]), int(params[0]))
+                ok = 1
             except:
                 print_remove_error()
     elif len(params) == 3:
         if params[1] == 'to':
             try:
                 remove_apartments(apartments, int(params[0]), int(params[2]))
+                ok = 1
             except:
                 print_remove_error()
         else:
             print_remove_error()
     else:
         print_remove_error()
+    if ok == 0:
+        history.pop()
 
-def sort_ui(apartments, params, expenses):
+def sort_ui(apartments, params, expenses, history):
+    ok = 0
+    history.append(apartments[:])
     if len(params) != 1 or params[0] != 'type' and params[0] != 'apartment':
         print_sort_error()
         return
     if params[0] == 'apartment':
         apartments = sort_apartment(apartments, expenses)
         print_apartments(apartments, expenses, -1, -1)
+        ok = 1
     else:
         expenses_dict = sort_type(apartments, expenses)
         print_list(expenses_dict)
+        ok = 1
+    if ok == 0:
+        history.pop()
 
-
-def filter_ui(apartments, params, expenses):
+def filter_ui(apartments, params, expenses, history):
+    ok = 0
+    history.append(apartments[:])
     if len(params) != 1:
         print_filter_error()
         return
     if validate_expense(params[0], expenses) == 1:
         apartments = filter_type(apartments, params[0], expenses)
         print_apartments(apartments, expenses, -1, -1)
+        ok = 1
     else:
         try:
          apartments = filter_amount(apartments, int(params[0]), expenses)
          print_apartments(apartments, expenses, -1, -1)
+         ok = 1
         except:
           print_filter_error()
+    history.pop()
 
 def print_list(list):
     for e in list:
         print(e["expense"] + " Total: " + str(e["total"]))
+
+
+def undo_ui(apartments, history):
+    if len(history) == 0:
+        print_undo_error()
+        return
+    undo(apartments, history)
+
 
 def print_help_menu():
     print("**********************")
@@ -309,18 +334,19 @@ def readCommand(): #Read and parse the user's command
 def start():
     apartments = init_apartments()
     expenses = init_expenses()
+    history = []
     while True: #read user command
         cmdtuple = readCommand()
         cmd = cmdtuple[0]
         params = cmdtuple[1]
         if cmd == 'add':
-            add_apartment_expense_ui(apartments, params, expenses)
+            add_apartment_expense_ui(apartments, params, expenses, history)
         elif cmd == 'list':
             print_apartments_ui(apartments, params, expenses)
         elif cmd == 'replace':
-            replace_apartment_ui(apartments, params, expenses)
+            replace_apartment_ui(apartments, params, expenses, history)
         elif cmd == 'remove':
-            remove_apartment_ui(apartments, params, expenses)
+            remove_apartment_ui(apartments, params, expenses, history)
         elif cmd == 'help':
             print_help_menu()
         elif cmd == "sum":
@@ -328,9 +354,11 @@ def start():
         elif cmd == "max":
             max_expense_ui(apartments, params, expenses)
         elif cmd == "sort":
-            sort_ui(apartments, params, expenses)
+            sort_ui(apartments, params, expenses, history)
         elif cmd == "filter":
-            filter_ui(apartments, params, expenses)
+            filter_ui(apartments, params, expenses, history)
+        elif cmd == "undo":
+            undo_ui(apartments, history)
         elif cmd == 'exit':
             break
         else:
