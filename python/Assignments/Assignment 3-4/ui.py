@@ -1,100 +1,6 @@
-#APARTMENT BUILDING ADMINISTRATOR
-
-
-def validate_data(ap_id, type_e, amount, type_list): # Validate input data
-    if ap_id <= 0 : #Apartment id should be > 0
-        return "Invalid apartament id!"
-    if amount <= 0: #The cost should be > 0
-        return "Invalid cost!"
-    ok = 0
-    for t in type_list: #Type of expense should be found in the list
-        if type_e == t:
-            ok = 1
-    if ok == 0:
-        return "Type of expense is not on the list!"
-    return None
-
-def validate_expense(expense, expenses): #Verify if the expense is on the list
-    for e in expenses:
-        if e == expense:
-            return 1
-    print_type_error()
-    return None 
-
-
-def create_apartment(ap_id, type_e, amount): #Create an apartment
-    return{"ap_id":ap_id, type_e:amount}
-
-
-
-def add_apartment(ap_id, type_e, amount, type_list, apartmentList):
-    '''
-    If apartment is valid it can be added to the list
-    ''' 
-    msg = validate_data(ap_id, type_e, amount, type_list)
-    if msg is not None:
-        print(msg)
-    else:
-        apartment = create_apartment(ap_id, type_e, amount)
-        apartmentList.append(apartment)
-
-
-def test_add_apartment():
-    aplist = []
-    ap = create_apartment(39, "gas", 100)
-    aplist.append(ap)
-    assert get_ap_id(ap) == 39
-    assert get_ap_amount_for_type(ap, "gas") == 100
-    assert get_ap_amount_for_type(ap, "water") == 0
-    assert len(aplist) == 1
-
-
-
-
-#Getter functions
-def get_ap_id(apartment):
-    return apartment["ap_id"]
-def get_ap_amount_for_type(apartment, type_e): #Get the amount of money to be payed for a known expense
-    try:
-        return apartment[type_e]
-    except:
-        return 0
-def get_total_expenses(apartment, type_e): #Get the total amount of money to be payed assigned to an apartment
-    sum = 0
-    for i in type_e:
-        sum += get_ap_amount_for_type(apartment, i)
-    return sum
-#Getter functions end
-
-
-#Set functions
-def set_apartment_expense(apartment, type_e, amount): #Set the money to be payed(amount) by the apartment for an expense(type_e)
-    apartment[type_e] = amount
-#Set functions end
-
-
-def init_apartments(): #Initialize apartments list
-    res = []
-    res.append(create_apartment(25, "gas", 100))
-    res.append(create_apartment(24, "gas", 131))
-    res.append(create_apartment(21, "gas", 1))
-    res.append(create_apartment(10, "water", 52))
-    res.append(create_apartment(12, "gas", 21))
-    res.append(create_apartment(2, "gas", 21))
-    res.append(create_apartment(6, "gas", 92))
-    res.append(create_apartment(1, "gas", 10))
-    res.append(create_apartment(100, "gas", 11))
-    return res
-
-
-def init_expenses(): #Initialize expenses list
-    res = []
-    res.append("gas")
-    res.append("water")
-    res.append("electricity")
-    res.append("heat")
-    res.append("other")
-    return res
+#APARTMENT BUILDING ADMINISTRATOR - UI
+from domain import *
+from functions import *
 
 def add_apartment_expense_ui(apartments, params,type_list):
     '''
@@ -156,17 +62,6 @@ def print_max_error():
 
 #Error printing functions end
 
-def sum_expense(apartments, expense):
-    '''
-    Input - list of apartments
-          - an expense from the list
-    Output- returns sum of the amounts from apartments for the expense sent as parameter
-    '''
-    sum = 0
-    for ap in apartments:
-        sum += get_ap_amount_for_type(ap, expense)
-    return sum  
-
 def sum_expense_ui(apartments, param, expenses):
     '''
     Input - list of apartments
@@ -180,23 +75,6 @@ def sum_expense_ui(apartments, param, expenses):
         if validate_expense(param[0], expenses) == 1:
             print("The sum for " + param[0] + " is: " + str(sum_expense(apartments, param[0])))
 
-
-def max_expense(apartment, expenses):
-    '''
-    Input - an apartment given by user
-          - list of expenses
-    Output- return the maximum expense for the apartment given by user
-    '''
-    maxi = 0
-    max_ex = 0
-    for ex in expenses:
-       if get_ap_amount_for_type(apartment, ex) > maxi:
-           maxi = get_ap_amount_for_type(apartment, ex)
-           max_ex = ex
-    if maxi == 0:
-        return "There is no amount of money to be payed by this apartment"
-    else:
-        return str(max_ex) + ": " + str(maxi) 
 
 def max_expense_ui(apartments, params, expenses):
     '''
@@ -223,53 +101,7 @@ def max_expense_ui(apartments, params, expenses):
         else:
             print_apartment_error()
 
-            
-            
-def remove_apartments(apartments, start, end):
-    '''
-    The parameters start, end are given by user and if they are valid ->
-    ->  Remove apartments from the list with the id >= start and <= end
-    '''
-    ok = 0
-    for i in range(len(apartments)):
-      if int(get_ap_id(apartments[i])) >= start and int(get_ap_id(apartments[i])) <= end:
-          del apartments[i]
-          ok = 1
-          break
-    if ok == 1:
-        remove_apartments(apartments, start, end)
-
-def remove_apartment_ui(apartments, params, expenses):
-    '''
-    Here the command "remove" given by user is processed
-    1.remove an expense from the list
-    2.remove an apartment
-    3.remove more than one apartments
-    The parameters are validated first
-    '''
-    if len(params) == 1:
-        try:
-            index = expenses.index(params[0])
-            expenses.pop(index)
-        except:
-            try:
-                for i in range(len(apartments)):
-                    if int(get_ap_id(apartments[i])) == int(params[0]):
-                        del apartments[i]
-                        break
-            except:
-                print_remove_error()
-    elif len(params) == 3:
-        try:
-            remove_apartments(apartments, int(params[0]), int(params[2]))
-        except:
-            print_remove_error()
-    else:
-        print_remove_error()
-
-
-
-
+    
 def print_apartments(apartments, type_list, start, end):
     '''
     Print the list of apartments with the id >= start and <= end
@@ -288,7 +120,7 @@ def print_apartments(apartments, type_list, start, end):
         print("List of apartments:")
         for i in apartments:
           ok = 0
-          if get_total_expenses(i, type_list) != 0 :
+          if get_total_expenses(i) != 0 :
               if start <= get_ap_id(i) and end >= get_ap_id(i) or end == -1:
                 print ("Apartment id: " + str(get_ap_id(i)) , end=" ")
                 ok = 1
@@ -312,20 +144,20 @@ def print_apartments_expense(apartments, expenses, comparison, amount):
     ok = 0
     if comparison == '<':
         for ap in apartments:
-            if get_total_expenses(ap, expenses) < amount:
+            if get_total_expenses(ap) < amount:
                 ok = 1
-                print("Apartment id: " + str(get_ap_id(ap)) + " Total: " + str(get_total_expenses(ap, expenses)))
+                print("Apartment id: " + str(get_ap_id(ap)) + " Total: " + str(get_total_expenses(ap)))
     elif comparison == '=':
         for ap in apartments:
-            if get_total_expenses(ap, expenses) == amount:
+            if get_total_expenses(ap) == amount:
                 ok = 1
                 print("Apartment id: " + str(get_ap_id(ap)))
 
     elif comparison == '>':
         for ap in apartments:
-            if get_total_expenses(ap, expenses) > amount:
+            if get_total_expenses(ap) > amount:
                 ok = 1
-                print("Apartment id: " + str(get_ap_id(ap)) + " Total: " + str(get_total_expenses(ap, expenses)))
+                print("Apartment id: " + str(get_ap_id(ap)) + " Total: " + str(get_total_expenses(ap)))
     else:
         print_list_error()
     print("**********************")
