@@ -31,13 +31,14 @@ def replace_apartment_ui(apartments,params, type_list):
     for that expense
     '''
     ok = 0
-    if len(params) != 4:
+    if len(params) != 4 or params[2] != 'with':
        print_replace_error()
        return
     for ap in apartments:
         if int(get_ap_id(ap)) == int(params[0]):
             if validate_expense(params[1], type_list) == 1:
-                set_apartment_expense(ap, params[1], type_list, int(params[3]))
+                set_total_expenses(ap, (-1) * get_ap_amount_for_type(ap, params[1]))
+                set_apartment_expense(ap, params[1],  int(params[3]))
             ok = 1
     if ok == 0:
         print_apartment_error()
@@ -128,6 +129,7 @@ def print_apartments(apartments, type_list, start, end):
                     if get_ap_amount_for_type(i,j) is not None and get_ap_amount_for_type(i,j) != 0:
                         print(j + ": " + str(get_ap_amount_for_type(i,j)), end = " ")
           if ok == 1:
+              print("Total: " + str(get_total_expenses(i)))
               print ('\n')
     else:
         print("There is no apartment with this id!")
@@ -191,6 +193,39 @@ def print_apartments_ui(apartments, params, type_list):
           print_apartments(apartments, type_list, -1, -1)
     else:
           print("Invalid parameters!")
+
+def remove_apartment_ui(apartments, params, expenses):
+    '''
+    Here the command "remove" given by user is processed
+    1.remove an expense from the list
+    2.remove an apartment
+    3.remove more than one apartments
+    The parameters are validated first
+    '''
+    if len(params) == 1:
+        if validate_expense(params[0], expenses) == 1:
+            for i in apartments:
+                set_total_expenses(i, (-1) * get_ap_amount_for_type(i, params[0]))
+                set_apartment_expense(i,params[0], 0)
+        else:
+            try:
+                for i in range(len(apartments)):
+                    if int(get_ap_id(apartments[i])) == int(params[0]):
+                        del apartments[i]
+                        break
+            except:
+                print_remove_error()
+    elif len(params) == 3:
+        if params[1] == 'to':
+            try:
+                remove_apartments(apartments, int(params[0]), int(params[2]))
+            except:
+                print_remove_error()
+        else:
+            print_remove_error()
+    else:
+        print_remove_error()
+
 
 def print_help_menu():
     print("**********************")

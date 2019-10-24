@@ -17,7 +17,6 @@ def validate_expense(expense, expenses): #Verify if the expense is on the list
     for e in expenses:
         if e == expense:
             return 1
-    print_type_error()
     return None 
 
 

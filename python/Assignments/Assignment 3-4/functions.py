@@ -5,6 +5,9 @@ from domain import *
 #Set functions
 def set_apartment_expense(apartment, type_e, amount): #Set the money to be payed(amount) by the apartment for an expense(type_e)
     apartment[type_e] = amount
+    set_total_expenses(apartment, amount)
+def set_total_expenses(apartment, amount):
+    apartment["total"] += amount
 #Set functions end
 
 
@@ -75,30 +78,3 @@ def remove_apartments(apartments, start, end):
     if ok == 1:
         remove_apartments(apartments, start, end)
 
-def remove_apartment_ui(apartments, params, expenses):
-    '''
-    Here the command "remove" given by user is processed
-    1.remove an expense from the list
-    2.remove an apartment
-    3.remove more than one apartments
-    The parameters are validated first
-    '''
-    if len(params) == 1:
-        try:
-            index = expenses.index(params[0])
-            expenses.pop(index)
-        except:
-            try:
-                for i in range(len(apartments)):
-                    if int(get_ap_id(apartments[i])) == int(params[0]):
-                        del apartments[i]
-                        break
-            except:
-                print_remove_error()
-    elif len(params) == 3:
-        try:
-            remove_apartments(apartments, int(params[0]), int(params[2]))
-        except:
-            print_remove_error()
-    else:
-        print_remove_error()
