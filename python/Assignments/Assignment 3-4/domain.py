@@ -71,4 +71,3 @@ def init_expenses(): #Initialize expenses list
     res.append("other")
     return res
 
-

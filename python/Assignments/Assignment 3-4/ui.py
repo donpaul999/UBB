@@ -9,8 +9,10 @@ def add_apartment_expense_ui(apartments, params,type_list, history):
     Output - Nothing
     The function adds the apartment to the list if is not already there, or appends to the apartment a new expense
     '''
+    history.append(deepcopy(apartments[:]))
     if len(params) != 3:
         print_adding_error()
+        history.pop()
         return
     ok = 0
     if validate_expense(params[1], type_list) == 1:
@@ -185,9 +187,12 @@ def print_apartments_ui(apartments, params, type_list):
     Also, the command inputed by the user is valided
     '''
     if int(len(params)) == 3:
-        try:
-            print_apartments(apartments, type_list, int(params[0]), int(params[2]))
-        except:
+        if params[1] == 'to':
+            try:
+                print_apartments(apartments, type_list, int(params[0]), int(params[2]))
+            except:
+                print_list_error()
+        else:
             print_list_error()
     elif int(len(params)) == 2:
         try:
@@ -240,8 +245,6 @@ def remove_apartment_ui(apartments, params, expenses, history):
         history.pop()
 
 def sort_ui(apartments, params, expenses, history):
-    ok = 0
-    history.append(deepcopy(apartments[:]))
     if len(params) != 1 or params[0] != 'type' and params[0] != 'apartment':
         print_sort_error()
         return
@@ -253,8 +256,6 @@ def sort_ui(apartments, params, expenses, history):
         expenses_dict = sort_type(apartments, expenses)
         print_list(expenses_dict)
         ok = 1
-    if ok == 0:
-        history.pop()
 
 def filter_ui(apartments, params, expenses, history):
     ok = 0
@@ -289,11 +290,11 @@ def undo_ui(apartments, history):
 
 def print_help_menu():
     print("**********************")
-    print("1. Add a new transaction to the list.")
+    print(" 1. Add a new transaction to the list.")
     print("add <apartment> <type> <amount>")
     print("e.g.")
     print("add 25 gas 100 – add to apartment 25 an expense for gas in amount of 100 RON.")
-    print("2. Modify expenses from the list.")
+    print(" 2. Modify expenses from the list.")
     print("remove <apartment>")
     print("remove <start apartment> to <end apartment>")
     print("remove <type>")
@@ -303,7 +304,7 @@ def print_help_menu():
     print("remove 5 to 10 – remove all the expenses from apartments between 5 and 10.")
     print("remove gas – remove all the expenses for gas from all apartments.")
     print("replace 12 gas with 200 – replace the amount of the expense with type gas for apartment 12 with 200 RON.")
-    print("3. Write the expenses having different properties.")
+    print(" 3. Write the expenses having different properties.")
     print("list")
     print("list <apartment>")
     print("list [ < | = | > ] <amount>")
@@ -312,6 +313,26 @@ def print_help_menu():
     print("list 15 – write all expenses for apartment 15.")
     print("list > 100 - write all the apartments having total expenses > 100 RON.")
     print("list = 17 - write all the apartments having total expenses = 17 RON.")
+    print(" 4. Obtain different characteristics of the expenses.")
+    print("sum <type>")
+    print("max <apartment>")
+    print("sort apartment")
+    print("sort type")
+    print("e.g.")
+    print("sum gas – write the total amount for the expenses having type “gas”.")
+    print("max 25 – write the maximum amount per each expense type for apartment 25.")
+    print("sort apartment – write the list of apartments sorted ascending by total amount of expenses.")
+    print("sort type – write the total amount of expenses for each type, sorted ascending by amount of")
+    print("money.")
+    print(" 5. Filter.")
+    print("filter <type>")
+    print("filter <value>")
+    print("e.g.")
+    print("filter gas – keep only expenses for “gas”.")
+    print("filter 300 – keep only expenses having an amount of money smaller than 300 RON.")
+    print(" 6. Undo the last operation that modified program data.")
+    print("undo – the last operation that has modified program data will be reversed. The user has to be able")
+    print("to undo all operations performed since program start by repeatedly calling this function.")
     print("**********************")
 
 
