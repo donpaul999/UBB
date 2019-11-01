@@ -4,7 +4,7 @@ class UI:
     #Can the UI do jobs without a Service?
     #NO => it doesn't make sense to create UI without having a Service
 
-    def _init_(self, service):
+    def __init__(self, service):
         self._service = service
 
 
