@@ -1,8 +1,8 @@
-from service import service
+from service import Service
 
 class UI:
     def _init_(self, service):
-        self._expenses = []
+        self._service = service
 
     def addExpense(self):
         newExpense = None
@@ -18,6 +18,8 @@ class UI:
         print("4. Undo the last operation")
 
     def start(self):
-        pass
+        print_menu()
 
-
+s = Service()
+ui = UI()
+ui.start()

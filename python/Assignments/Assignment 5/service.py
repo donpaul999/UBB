@@ -7,13 +7,10 @@ class Service:
         Add the new expense to the existing ones
         '''
         ok = 1
-        if expense.Day < 1 and expense.Day > 30 or expense.amount < 1:
-            ok = 0
-        if ok == 1:
-            for i in range(0, len(expense.Type))
-                if(expense.Type[i] >= '0' and expense.Type[i] <= '9')
-                    ok = 0
-                    break
-        if ok == 0
+        if expense.Day < 1 and expense.Day > 30 or isinstance(expense.Day, int) == False:
             raise ValueError("New expense parameters are not valid!")
         self._expenses.append(expense)
+
+    def filterExpenses(self, cmp):
+        pass
+
