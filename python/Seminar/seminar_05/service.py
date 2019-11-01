@@ -6,7 +6,7 @@
 
 
 class Service:
-    def _init(self):
+    def __init__(self):
         self._stars = []
 
     def addStar(self, star):
