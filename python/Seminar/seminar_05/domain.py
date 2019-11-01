@@ -80,7 +80,7 @@ class Star:
         self.Magnitude = mag
 
     @property
-    def Loocation(self):
+    def Location(self):
         return self._loc
 
     @Location.setter
