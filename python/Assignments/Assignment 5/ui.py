@@ -7,7 +7,7 @@ class UI:
 
     def addExpense(self):
         newExpense = None
-        self._service.Expense(newExpense)
+        self._service.addExpense(Expense(newExpense))
 
     def filterExpenses(self):
         pass
