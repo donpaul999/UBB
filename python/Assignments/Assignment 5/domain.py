@@ -19,9 +19,15 @@ class Expense:
 
     @Day.setter
     def Day(self, value):
-        if value > 30 and value < 1 or isinstance(value, int) == False:
+        ok = 1
+        try:
+            if int(value) > 30 and int(value) < 1:
+                ok = 0
+        except:
+            ok = 0
+        if ok == 0:
             raise ValueError("Expense's day should be an integer between 1 and 30!")
-        self._day = value
+        self._day = int(value)
 
     @property
     def Amount(self):
@@ -29,9 +35,15 @@ class Expense:
 
     @Amount.setter
     def Amount(self, value):
-        if value < 0 or isinstance(value, int) == False:
+        ok = 1
+        try:
+            if int(value) < 0:
+                ok = 0
+        except:
+            ok = 0
+        if ok == 0:
             raise ValueError("Amount should be a positive integer!")
-        self._amount = value
+        self._amount = int(value)
 
     @property
     def Type(self):
@@ -39,6 +51,13 @@ class Expense:
 
     @Type.setter
     def Type(self, value):
+        try:
+            value = int(value)
+            ok = 0
+        except:
+            ok = 1
+        if ok == 0:
+            raise ValueError("Type should be a string!")
         self._type = value
 
     

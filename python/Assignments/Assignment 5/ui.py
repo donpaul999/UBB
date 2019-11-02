@@ -6,8 +6,10 @@ class UI:
         self._service = service
 
     def addExpense(self):
-        newExpense = None
-        self._service.addExpense(Expense(newExpense))
+        day = input("Input day: ")
+        amount = input("Input amount: ")
+        type = input("Input type: ")
+        self._service.addExpense(Expense(day,amount,type))
 
     def filterExpenses(self):
         pass
@@ -23,7 +25,7 @@ class UI:
         print("5. Exit")
 
     def print_expenses(self):
-        pass
+        print(self.print_expenses) 
     
     def undo(self):
         pass
