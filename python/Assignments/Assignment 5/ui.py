@@ -25,7 +25,7 @@ class UI:
         print("5. Exit")
 
     def print_expenses(self):
-        print(self.print_expenses) 
+        print(self._expenses) 
     
     def undo(self):
         pass
