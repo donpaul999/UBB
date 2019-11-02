@@ -1,4 +1,4 @@
-from domain import *
+from domain import Expense 
 
 class Service:
     def __init__(self):

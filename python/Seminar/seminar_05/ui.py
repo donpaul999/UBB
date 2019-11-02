@@ -1,4 +1,4 @@
-from service import service
+from service import Service
 
 class UI:
     #Can the UI do jobs without a Service?
@@ -20,9 +20,9 @@ class UI:
 
     def start(self):
         print('Welcome to the star catalogue!')
+        self.addStar()
         # Print menu, read user choice, etc
         # call addStart and sortStars methods
-
 s = Service()
 ui = UI(s)
 ui.start()

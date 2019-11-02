@@ -1,4 +1,5 @@
 from service import Service
+from domain import Expense
 
 class UI:
     def __init__(self, service):
@@ -44,6 +45,3 @@ class UI:
             else:
                 self.print_invalid()
 
-s = Service()
-ui = UI(s)
-ui.start()
