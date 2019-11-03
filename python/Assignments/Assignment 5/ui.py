@@ -28,7 +28,7 @@ class UI:
     def filterExpenses(self):
         value = input("Input value: ")
         try:
-            self._service.filterExpenses(self, value)
+            self._service.filterExpenses(value)
         except ValueError as e:
             print(e)
 
@@ -43,7 +43,7 @@ class UI:
         print("5. Exit")
 
     def printExpenses(self):
-        self._service.printExpenses(self)      
+        self._service.printExpenses()      
    
     def undo(self):
         try:

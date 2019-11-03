@@ -3,6 +3,9 @@ from copy import deepcopy
 
 class Service:
     def __init__(self):
+        '''
+        Initialize the expenses and history lists with an empty space.
+        '''
         self._expenses = []
         self._history = []
         
@@ -10,7 +13,13 @@ class Service:
        self._history.append(deepcopy(self._expenses[:]))
        self._expenses.append(expense)
 
-    def filterExpenses(self, value, x):
+    
+
+    def filterExpenses(self, x):
+        '''
+        parameters - x
+        Filters the expenses with the amount < x
+        '''
         ok = 0
         self._history.append(deepcopy(self._expenses[:]))
         try:
@@ -23,7 +32,7 @@ class Service:
         if ok == 0:
             self._history.pop()
 
-    def printExpenses(self, x):
+    def printExpenses(self):
         for i in self._expenses:
             if int(i.Amount) != 0:
                 print(i)
@@ -37,3 +46,16 @@ class Service:
             raise ValueError("No more undos!")
         self._expenses.clear()
         self._expenses.extend(self._history.pop())
+
+def test_filter():
+    v = Service()
+    v.addExpense(Expense(3,200,"water"))
+    v.addExpense(Expense(3,20,"gas"))
+    v.filterExpenses(100)
+    ok = 0
+    for i in v._expenses:
+        if i.Amount == 0:
+           ok = 1
+    assert ok == 1
+
+test_filter()

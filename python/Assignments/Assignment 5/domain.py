@@ -13,6 +13,7 @@ class Expense:
         self.Amount = amount
         self.Type = type
 
+
     def __repr__(self):
         return "Day: " + str(self.Day) +" Amount: " + str(self.Amount) + " Type: " + self.Type
 
@@ -40,7 +41,7 @@ class Expense:
     def Amount(self, value):
         ok = 1
         try:
-            if int(value) <= 0:
+            if int(value) < 0:
                 ok = 0
         except:
             ok = 0
@@ -65,5 +66,11 @@ class Expense:
         if ok == 0:
             raise ValueError("Expense's type should be a string!")
         self._type = value
-
     
+
+def test_expense():
+        v = Expense(1,2,"water")
+        assert v.Day == 1 and v.Amount == 2 and v.Type == "water"
+        v.Day = 21
+        assert v.Day == 21
+test_expense()
