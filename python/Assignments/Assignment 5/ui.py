@@ -14,15 +14,23 @@ class UI:
         self._service.addExpense(Expense(7,10,"heat"))
         self._service.addExpense(Expense(1,230,"heat"))
         self._service.addExpense(Expense(17,100,"water"))
+        self._service._history = []
 
     def addExpense(self):
         day = input("Input day: ")
         amount = input("Input amount: ")
         type = input("Input type: ")
-        self._service.addExpense(Expense(day,amount,type))
+        try:
+            self._service.addExpense(Expense(day,amount,type))
+        except ValueError as e:
+            print(e)
 
     def filterExpenses(self):
-        pass
+        value = input("Input value: ")
+        try:
+            self._service.filterExpenses(self, value)
+        except ValueError as e:
+            print(e)
 
     def print_invalid(self):
         print("Invalid command!")
@@ -34,12 +42,14 @@ class UI:
         print("4. Undo the last operation")
         print("5. Exit")
 
-    def print_expenses(self):
-        for i in self._service._expenses:
-          print(self._service._expenses[i]) 
-    
+    def printExpenses(self):
+        self._service.printExpenses(self)      
+   
     def undo(self):
-        pass
+        try:
+            self._service.undo()
+        except ValueError as e:
+            print(e)
 
     def start(self):
         while True:
@@ -48,7 +58,7 @@ class UI:
             if choice == "1":
                 self.addExpense()
             elif choice == "2":
-                self.print_expenses()
+                self.printExpenses()
             elif choice == "3":
                 self.filterExpenses()
             elif choice == "4":

@@ -13,9 +13,6 @@ class Expense:
         self.Amount = amount
         self.Type = type
 
-    def __str__(self):
-        return str(self)
-
     def __repr__(self):
         return "Day: " + str(self.Day) +" Amount: " + str(self.Amount) + " Type: " + self.Type
 
