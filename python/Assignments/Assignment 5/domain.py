@@ -40,12 +40,12 @@ class Expense:
     def Amount(self, value):
         ok = 1
         try:
-            if int(value) < 0:
+            if int(value) <= 0:
                 ok = 0
         except:
             ok = 0
         if ok == 0:
-            raise ValueError("Amount should be a positive integer!")
+            raise ValueError("Expense's amount should be a positive integer!")
         self._amount = int(value)
 
     @property
@@ -59,10 +59,11 @@ class Expense:
             ok = 0
         except:
             ok = 1
-        if len(value) == 0:
-            ok = 0
+        if ok == 1:
+            if len(value) == 0:
+                ok = 0
         if ok == 0:
-            raise ValueError("Type should be a string!")
+            raise ValueError("Expense's type should be a string!")
         self._type = value
 
     
