@@ -20,8 +20,6 @@ class UI:
 
     def start_game(self):
         self._game.newGame()
-        self._game._done = 0
-        self._game._guesses.clear()
         while self._game._done == 0:
             number = input("Write a guess: ")
             try: 

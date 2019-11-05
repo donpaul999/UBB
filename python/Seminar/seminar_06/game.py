@@ -28,12 +28,14 @@ class Game:
                     if c[i] == c[j]:
                         ok = 0
                         break
-        print(x)
+        #print(x) - to check the generated number when you doesn't know how to win efficiently ;)
         return x
                    
 
 
     def newGame(self):
+        self._done = 0
+        self._guesses.clear()
         self._number = self._generateNumber()
 
 
@@ -66,8 +68,6 @@ class Game:
         '''
         for i in self._guesses:
             if i == no:
-                print(i)
-                print(no)
                 self._done = 1
                 raise ValueError("Repetead Guess! Game lost!")
         self._guesses.append(no)
