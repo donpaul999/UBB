@@ -44,10 +44,14 @@ class UI:
 
     def printExpenses(self):
         print("**********************")
-        try:
-            self._service.printExpenses()    
-        except ValueError as e:
-            print(e)  
+        ok = 0
+        for i in self._service._expenses:
+            if int(i.Amount) != 0:
+                ok = 1
+                print(i)
+                print(" ")    
+        if ok == 0:
+            print("There are no expenses in the list!")
         print("**********************")
    
     def undo(self):

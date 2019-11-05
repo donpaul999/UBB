@@ -35,16 +35,6 @@ class Service:
         if ok == 0:
             self._history.pop()
 
-    def printExpenses(self):
-        ok = 0
-        for i in self._expenses:
-            if int(i.Amount) != 0:
-                ok = 1
-                print(i)
-                print(" ")
-        if ok == 0:
-            raise ValueError("There are no expenses in the list!")
-
     @property
     def Expenses(self):
         return self._expenses
