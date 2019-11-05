@@ -1,0 +1,2 @@
+#SEMINAR 06
+BULLS AND COWS - Colta Paul-Stefan
