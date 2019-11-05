@@ -56,7 +56,7 @@ segment code use32 class=code
         
         mov [c], EAX ; c = 199777Dh
         
-        ;push dword EAX
+        ;push dword [c]
         ;call[printf]
         
         

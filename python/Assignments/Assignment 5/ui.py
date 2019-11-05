@@ -24,7 +24,7 @@ class UI:
             self._service.addExpense(Expense(day,amount,type))
         except ValueError as e:
             print(e)
-
+    
     def filterExpenses(self):
         value = input("Input value: ")
         try:

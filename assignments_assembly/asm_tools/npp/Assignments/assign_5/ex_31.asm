@@ -1,4 +1,4 @@
-;Se da un sir de caractere S. Sa se construiasca sirul D care sa contina toate literele mici din sirul S.
+;A byte string S is given. Build the string D whose elements represent the sum of each two consecutive bytes of S.
 
 bits 32 ; assembling for the 32 bits architecture
 
@@ -13,21 +13,20 @@ import exit msvcrt.dll    ; exit is a function that ends the calling process. It
 ; our data is declared here (the variables needed by our program)
 segment data use32 class=data
     ; ...
-    S DB 'a', 'A', 'b', 'B', '2', '%', 'x'
+    S DB 1, 2, 3, 4, 5, 6
     len equ $-S
     d times len DB 0
     
 ; our code starts here
 segment code use32 class=code
     start:
-        mov ESI, -1
+        mov ESI, 0
         repeat:
+            mov AL, [S + ESI]
             inc ESI
-            mov AL, [S+ESI]
-            cmp AL, 'a'
-            jb repeat
-            cmp AL, 'z'
-            ja repeat
+            mov BL, [S + ESI]
+            add AL, BL
+            add AL, '0'
             mov [d + ESI], AL
         cmp ESI, len - 1
         jb repeat

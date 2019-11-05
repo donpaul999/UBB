@@ -56,11 +56,12 @@
     54          ******************       warning: word value exceeds bounds [-w+number-overflow]
     55 00000049 6609D8                          or AX, BX   ;EAX = 110010111011101111101 (19777Dh)
     56                                          
-    57 0000004C A3[03000000]                    mov [c], EAX
-    58                                          ;push dword EAX
-    59                                          ;call[printf]
-    60                                          
+    57 0000004C A3[03000000]                    mov [c], EAX ; c = 199777Dh
+    58                                          
+    59                                          ;push dword [c]
+    60                                          ;call[printf]
     61                                          
-    62                                          ; exit(0)
-    63 00000051 6A00                            push    dword 0      ; push the parameter for exit onto the stack
-    64 00000053 FF15[00000000]                  call    [exit]       ; call exit to terminate the program
+    62                                          
+    63                                          ; exit(0)
+    64 00000051 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    65 00000053 FF15[00000000]                  call    [exit]       ; call exit to terminate the program
