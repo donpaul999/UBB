@@ -25,7 +25,7 @@ class Expense:
     def Day(self, value):
         ok = 1
         try:
-            if int(value) > 30 and int(value) < 1:
+            if int(value) > 30 or int(value) < 1:
                 ok = 0
         except:
             ok = 0

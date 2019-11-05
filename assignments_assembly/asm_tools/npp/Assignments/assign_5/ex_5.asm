@@ -31,7 +31,6 @@ segment code use32 class=code
             mov [d + ESI], AL
         cmp ESI, len
         jb repeat
-    
         ; exit(0)
         push    dword 0      ; push the parameter for exit onto the stack
         call    [exit]       ; call exit to terminate the program

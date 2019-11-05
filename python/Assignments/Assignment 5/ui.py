@@ -43,7 +43,12 @@ class UI:
         print("5. Exit")
 
     def printExpenses(self):
-        self._service.printExpenses()      
+        print("**********************")
+        try:
+            self._service.printExpenses()    
+        except ValueError as e:
+            print(e)  
+        print("**********************")
    
     def undo(self):
         try:

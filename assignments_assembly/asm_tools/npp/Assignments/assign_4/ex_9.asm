@@ -13,6 +13,11 @@ global start
 ; declare external functions needed by our program
 extern exit               ; tell nasm that exit exists even if we won't be defining it
 import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+import printf msvcrt.dll
+extern ExitProcess, printf
+import ExitProcess kernel32.dll
+import printf msvcrt.dll
+
                           ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
 
 ; our data is declared here (the variables needed by our program)
@@ -47,9 +52,12 @@ segment code use32 class=code
                 
         mov BX, [b]
         and BX, 11111111000000000000000000000000b
-        or AX, BX   ;AX = 110010111011101111101 (19777Dh)
+        or AX, BX   ;EAX = 110010111011101111101 (19777Dh)
         
+        mov [c], EAX ; c = 199777Dh
         
+        ;push dword EAX
+        ;call[printf]
         
         
         ; exit(0)

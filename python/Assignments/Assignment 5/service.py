@@ -10,6 +10,9 @@ class Service:
         self._history = []
         
     def addExpense(self, expense):
+       '''
+       Appends the new expense to the list and to the history list
+       '''
        self._history.append(deepcopy(self._expenses[:]))
        self._expenses.append(expense)
 
@@ -33,9 +36,14 @@ class Service:
             self._history.pop()
 
     def printExpenses(self):
+        ok = 0
         for i in self._expenses:
             if int(i.Amount) != 0:
+                ok = 1
                 print(i)
+                print(" ")
+        if ok == 0:
+            raise ValueError("There are no expenses in the list!")
 
     @property
     def Expenses(self):

@@ -13,47 +13,54 @@
     13                                  ; declare external functions needed by our program
     14                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
     15                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
-    16                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
-    17                                  
-    18                                  ; our data is declared here (the variables needed by our program)
-    19                                  segment data use32 class=data
-    20                                      ; ...
-    21 00000000 5777                         a dw 0111011101010111b
-    22 00000002 BE                           b db 10111110b
-    23 00000003 00000000                     c dd 0
-    24                                  ; our code starts here
-    25                                  segment code use32 class=code
-    26                                      start:
-    27                                          ; ...
-    28 00000000 66B80000                        mov AX, 0
-    29                                          
-    30 00000004 668B1D[00000000]                mov BX, [a]
-    31 0000000B 6681E3C003                      and BX, 00000000000000000000001111000000b
-    32 00000010 B106                            mov CL, 6
-    33 00000012 66D3CB                          ror BX, CL
-    34 00000015 6609D8                          or AX, BX
-    35                                          
-    36 00000018 6683C830                        or AX,00000000000000000000000000110000b
-    37                                          
-    38 0000001C 668B1D[02000000]                mov BX, [b]
-    39 00000023 6683E306                        and BX, 00000000000000000000000000000110b
-    40 00000027 B104                            mov CL, 4
-    41 00000029 66D3C3                          rol BX, CL
-    42 0000002C 6609D8                          or AX, BX
-    43                                          
-    44 0000002F 668B1D[00000000]                mov BX, [a]
-    45 00000036 6681E300FF                      and BX, 00000000111111111111111100000000b
-    45          ******************       warning: word data exceeds bounds [-w+number-overflow]
-    46 0000003B 6609D8                          or AX, BX
-    47                                                  
-    48 0000003E 668B1D[02000000]                mov BX, [b]
-    49 00000045 6683E300                        and BX, 11111111000000000000000000000000b
-    49          ******************       warning: word value exceeds bounds [-w+number-overflow]
-    50 00000049 6609D8                          or AX, BX
-    51                                          
-    52                                          
-    53                                          
-    54                                          
-    55                                          ; exit(0)
-    56 0000004C 6A00                            push    dword 0      ; push the parameter for exit onto the stack
-    57 0000004E FF15[00000000]                  call    [exit]       ; call exit to terminate the program
+    16                                  import printf msvcrt.dll
+    17                                  extern ExitProcess, printf
+    18                                  import ExitProcess kernel32.dll
+    19                                  import printf msvcrt.dll
+    20                                  
+    21                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    22                                  
+    23                                  ; our data is declared here (the variables needed by our program)
+    24                                  segment data use32 class=data
+    25                                      ; ...
+    26 00000000 5777                         a dw 0111011101010111b
+    27 00000002 BE                           b db 10111110b
+    28 00000003 00000000                     c dd 0
+    29                                  ; our code starts here
+    30                                  segment code use32 class=code
+    31                                      start:
+    32                                          ; ...
+    33 00000000 66B80000                        mov AX, 0
+    34                                          
+    35 00000004 668B1D[00000000]                mov BX, [a]
+    36 0000000B 6681E3C003                      and BX, 00000000000000000000001111000000b
+    37 00000010 B106                            mov CL, 6
+    38 00000012 66D3CB                          ror BX, CL
+    39 00000015 6609D8                          or AX, BX
+    40                                          
+    41 00000018 6683C830                        or AX,00000000000000000000000000110000b
+    42                                          
+    43 0000001C 668B1D[02000000]                mov BX, [b]
+    44 00000023 6683E306                        and BX, 00000000000000000000000000000110b
+    45 00000027 B104                            mov CL, 4
+    46 00000029 66D3C3                          rol BX, CL
+    47 0000002C 6609D8                          or AX, BX
+    48                                          
+    49 0000002F 668B1D[00000000]                mov BX, [a]
+    50 00000036 6681E300FF                      and BX, 00000000111111111111111100000000b
+    50          ******************       warning: word data exceeds bounds [-w+number-overflow]
+    51 0000003B 6609D8                          or AX, BX
+    52                                                  
+    53 0000003E 668B1D[02000000]                mov BX, [b]
+    54 00000045 6683E300                        and BX, 11111111000000000000000000000000b
+    54          ******************       warning: word value exceeds bounds [-w+number-overflow]
+    55 00000049 6609D8                          or AX, BX   ;EAX = 110010111011101111101 (19777Dh)
+    56                                          
+    57 0000004C A3[03000000]                    mov [c], EAX
+    58                                          ;push dword EAX
+    59                                          ;call[printf]
+    60                                          
+    61                                          
+    62                                          ; exit(0)
+    63 00000051 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    64 00000053 FF15[00000000]                  call    [exit]       ; call exit to terminate the program

@@ -1,7 +1,9 @@
 <NotepadPlus>
     <Session activeView="0">
-        <mainView activeIndex="0">
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="1404" startPos="908" endPos="908" selMode="0" lang="Assembly" encoding="-1" filename="D:\UBB\asm_tools\npp\ex_5.asm" backupFilePath="" originalFileLastModifTimestamp="1572931899" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="7864439" mapWrapIndentMode="-1" mapIsWrap="no" />
+        <mainView activeIndex="1">
+            <File firstVisibleLine="8" xOffset="0" scrollWidth="1404" startPos="1161" endPos="1161" selMode="0" lang="Assembly" encoding="-1" filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_5\ex_5.asm" backupFilePath="" originalFileLastModifTimestamp="1572935125" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="-972163055" mapWrapIndentMode="-1" mapIsWrap="no" />
+            <File firstVisibleLine="36" xOffset="0" scrollWidth="1404" startPos="1865" endPos="1865" selMode="0" lang="Assembly" encoding="-1" filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_4\ex_9.asm" backupFilePath="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\backup\ex_9.asm@2019-11-05_082825" originalFileLastModifTimestamp="1572935135" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="63527664" mapWrapIndentMode="-1" mapIsWrap="no" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="1404" startPos="369" endPos="268" selMode="0" lang="Assembly" encoding="-1" filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\exemplu.asm" backupFilePath="" originalFileLastModifTimestamp="1572930920" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="0" mapWrapIndentMode="-1" mapIsWrap="no" />
         </mainView>
         <subView activeIndex="0" />
     </Session>
