@@ -1,0 +1,37 @@
+     1                                  ;Se da un sir de caractere S. Sa se construiasca sirul D care sa contina toate literele mici din sirul S.
+     2                                  
+     3                                  bits 32 ; assembling for the 32 bits architecture
+     4                                  
+     5                                  ; declare the EntryPoint (a label defining the very first instruction of the program)
+     6                                  global start        
+     7                                  
+     8                                  ; declare external functions needed by our program
+     9                                  extern exit               ; tell nasm that exit exists even if we won't be defining it
+    10                                  import exit msvcrt.dll    ; exit is a function that ends the calling process. It is defined in msvcrt.dll
+    11                                                            ; msvcrt.dll contains exit, printf and all the other important C-runtime specific functions
+    12                                  
+    13                                  ; our data is declared here (the variables needed by our program)
+    14                                  segment data use32 class=data
+    15                                      ; ...
+    16 00000000 61416242322578              S DB 'a', 'A', 'b', 'B', '2', '%', 'x'
+    17                                      len equ $-S
+    18 00000007 00<rept>                    d times len DB 0
+    19                                      
+    20                                  ; our code starts here
+    21                                  segment code use32 class=code
+    22                                      start:
+    23 00000000 BEFFFFFFFF                      mov ESI, -1
+    24                                          repeat:
+    25 00000005 46                                  inc ESI
+    26 00000006 8A86[00000000]                      mov AL, [S+ESI]
+    27 0000000C 3C61                                cmp AL, 'a'
+    28 0000000E 72F5                                jb repeat
+    29 00000010 3C7A                                cmp AL, 'z'
+    30 00000012 77F1                                ja repeat
+    31 00000014 8886[07000000]                      mov [d + ESI], AL
+    32 0000001A 83FE07                          cmp ESI, len
+    33 0000001D 72E6                            jb repeat
+    34                                      
+    35                                          ; exit(0)
+    36 0000001F 6A00                            push    dword 0      ; push the parameter for exit onto the stack
+    37 00000021 FF15[00000000]                  call    [exit]       ; call exit to terminate the program
