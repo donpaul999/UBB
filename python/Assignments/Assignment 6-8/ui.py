@@ -6,13 +6,40 @@ class UI:
         self._service = service
 
     def addStudent(self):
-        pass
+        id = input("Input id: ")
+        name = input("Input name: ")
+        try:
+            self._service.addStudent(Student(id, name))
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
+
+        
 
     def addDiscipline(self):
-        pass
+        id = input("Input id: ")
+        name = input("Input name: ")
+        try:
+            self._service.addDiscipline(Discipline(id, name))
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
+
+        
 
     def addGrade(self):
-        pass
+        idD = input("Input id of student: ")
+        idS = input("Input id of discipline: ")
+        value = input("Input grade: ")
+        try:
+            self._service.addGrade(Grade(idD,idS, value))
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
+
 
 
     def printStudents(self):
@@ -58,10 +85,25 @@ class UI:
 
 
     def update_student(self):
-        pass
+        id = input("Input id: ")
+        name = input("Input the new name: ")
+        try:
+            self._service.update_student(id, name)
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
 
     def update_discipline(self):
-        pass
+        id = input("Input id: ")
+        name = input("Input the new name: ")
+        try:
+            self._service.update_discipline(id, name)
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
+
 
     def print_menu(self):
         print("1. Add a new student")
@@ -81,6 +123,12 @@ class UI:
 
     def print_invalid(self):
         print("Invalid command!")
+    
+    def undo(self):
+        pass
+
+    def redo(self):
+        pass
 
     def start(self):
         while True:
@@ -110,3 +158,4 @@ class UI:
                 self.update_discipline()
             else:
                 self.print_invalid()
+
