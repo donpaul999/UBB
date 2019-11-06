@@ -4,16 +4,6 @@ from domain import Expense
 class UI:
     def __init__(self, service):
         self._service = service
-        self._service.addExpense(Expense(3,200,"water"))
-        self._service.addExpense(Expense(2,220,"gas"))
-        self._service.addExpense(Expense(20,300,"water"))
-        self._service.addExpense(Expense(15,900,"electricity"))
-        self._service.addExpense(Expense(23,100,"water"))
-        self._service.addExpense(Expense(5,20,"gas"))
-        self._service.addExpense(Expense(3,2,"heat"))
-        self._service.addExpense(Expense(7,10,"heat"))
-        self._service.addExpense(Expense(1,230,"heat"))
-        self._service.addExpense(Expense(17,100,"water"))
         self._service._history = []
 
     def addExpense(self):
