@@ -66,17 +66,18 @@ class Service:
         ok = 0
         for i in self._students:
             if i.studentId == int(id):
-                self.remove_grades_student(id)
+                self.remove_grades_student(int(id))
                 self._students.remove(i)
                 ok = 1
                 break
         if ok == 0:
             raise ValueError("ID is not in the list!")
+
     def remove_discipline(self, id):
         ok = 0
         for i in self._disciplines:
-            if i.studentId == int(id):
-                self.remove_grades_discipline(id)
+            if i.disciplineId == int(id):
+                self.remove_grades_discipline(int(id))
                 self._disciplines.remove(i)
                 ok = 1
                 break
@@ -87,8 +88,10 @@ class Service:
         for i in self._grades:
             if i.studentId == ID:
                 self._grades.remove(i)
+                break
             
     def remove_grades_discipline(self, ID):
         for i in self._grades:
             if i.disciplineId == ID:
                 self._grades.remove(i)
+                break

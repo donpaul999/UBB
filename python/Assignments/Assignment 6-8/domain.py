@@ -96,7 +96,7 @@ class Grade:
         self.Value = value
 
     def __eq__(self, other):
-        return self.disciplineId == other.disciplineId or self.studentId == other.studentId
+        return self.studentId == other.studentId
      
     def __repr__(self):
         return "Discipline ID: " + str(self.disciplineId) + "Student ID: " + str(self.studentId) + " Grade: " + self.Value

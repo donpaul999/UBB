@@ -175,7 +175,7 @@ class UI:
                 return
             elif choice == "3":
                 self.update_student()
-            elif choice == "6":
+            elif choice == "7":
                 self.update_discipline()
             elif choice == "4":
                 self.remove_student()
