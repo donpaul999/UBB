@@ -104,19 +104,40 @@ class UI:
             print(e)
             self.print_stars()
 
+    def remove_student(self):
+        id = input("Input id: ")
+        try:
+            self._service.remove_student(id)
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
 
+     
+    def remove_discipline(self):
+        id = input("Input id: ")
+        try:
+            self._service.remove_discipline(id)
+        except ValueError as e:
+            self.print_stars()
+            print(e)
+            self.print_stars()
+
+    
     def print_menu(self):
         print("1. Add a new student")
         print("2. Show the list of students")
         print("3. Update a student")
-        print("4. Add a new discipline")
-        print("5. Show the list of disciplines")
-        print("6. Update a discipline")
-        print("7. Add a new grade")
-        print("8. Show the list of grades")
-        print("9. Undo the last operation")
-        print("10. Redo the last operation")
-        print("11. Exit")
+        print("4. Remove a student")
+        print("5. Add a new discipline")
+        print("6. Show the list of disciplines")
+        print("7. Update a discipline")
+        print("8. Remove a discipline")
+        print("9. Add a new grade")
+        print("10. Show the list of grades")
+        print("11. Undo the last operation")
+        print("12. Redo the last operation")
+        print("13. Exit")
 
     def print_stars(self):
         print("***************************")
@@ -138,24 +159,28 @@ class UI:
                 self.addStudent()
             elif choice == "2":
                 self.printStudents()
-            elif choice == "4":
-                self.addDiscipline()
             elif choice == "5":
+                self.addDiscipline()
+            elif choice == "6":
                 self.printDisciplines()
-            elif choice == "7":
-                self.addGrade()
-            elif choice == "8":
-                self.printGrades()
             elif choice == "9":
-                self.undo()
+                self.addGrade()
             elif choice == "10":
-                self.redo()
+                self.printGrades()
             elif choice == "11":
+                self.undo()
+            elif choice == "12":
+                self.redo()
+            elif choice == "13":
                 return
             elif choice == "3":
                 self.update_student()
             elif choice == "6":
                 self.update_discipline()
+            elif choice == "4":
+                self.remove_student()
+            elif choice == "8":
+                self.remove_discipline()            
             else:
                 self.print_invalid()
 

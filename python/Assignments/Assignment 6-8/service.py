@@ -62,3 +62,21 @@ class Service:
         if ok == 0:
             raise ValueError("ID is not in the list!")
     
+    def remove_student(self, id):
+        ok = 0
+        for i in self._students:
+            if i.studentId == int(id):
+                self._students.remove(i)
+                ok = 1
+                break
+        if ok == 0:
+            raise ValueError("ID is not in the list!")
+    def remove_discipline(self, id):
+        ok = 0
+        for i in self._disciplines:
+            if i.studentId == int(id):
+                self._disciplines.remove(i)
+                ok = 1
+                break
+        if ok == 0:
+            raise ValueError("ID is not in the list!")

@@ -6,6 +6,9 @@ class Student:
     def __repr__(self):
         return "Student ID: " + str(self.studentId) + " Name: " + self.Name
     
+    def __eq__(self, other):
+        return self.studentId == other.studentId
+
     @property
     def studentId(self):
         return self._sId
@@ -51,7 +54,10 @@ class Discipline:
 
     def __repr__(self):
         return "Discipline ID: " + str(self.disciplineId) + " Name: " + self.Name
-    
+
+    def __eq__(self, other):
+        return self.disciplineId == other.disciplineId
+        
     @property
     def disciplineId(self):
         return self._dId
