@@ -23,3 +23,5 @@ and rental history. The app must allow its users to manage clients, cars and ren
 '''
 
 
+class UI:
+    pass
