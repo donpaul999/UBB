@@ -6,13 +6,16 @@
         <Replace name="    " />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="C:\path\asm_tools\npp\example.asm" />
         <File filename="D:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template_ro_.asm" />
         <File filename="D:\DOCS\UBB\ASC\examples\template_en.asm" />
         <File filename="d:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template.asm" />
         <File filename="d:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template_ro.asm" />
         <File filename="D:\work\check\test.asm" />
         <File filename="D:\DOCS\UBB\ASC\intrebari_TODOs.txt" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\exemplu.asm" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_4\ex_9.asm" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Test\ex_6.asm" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_6\ex_10.asm" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -54,7 +57,7 @@
         <GUIConfig name="MISC" fileSwitcherWithoutExtColumn="no" backSlashIsEscapeCharacterForSql="yes" newStyleSaveDlg="no" isFolderDroppedOpenFiles="no" docPeekOnTab="no" docPeekOnMap="no" />
         <GUIConfig name="searchEngine" searchEngineChoice="2" searchEngineCustom="" />
         <GUIConfig name="SmartHighLight" matchCase="no" wholeWordOnly="yes" useFindSettings="no" onAnotherView="no">yes</GUIConfig>
-        <GUIConfig name="ScintillaPrimaryView" lineNumberMargin="show" bookMarkMargin="show" indentGuideLine="show" folderMarkStyle="box" lineWrapMethod="aligned" currentLineHilitingShow="show" scrollBeyondLastLine="no" disableAdvancedScrolling="no" wrapSymbolShow="hide" Wrap="yes" borderEdge="yes" edge="no" edgeNbColumn="80" zoom="2" zoom2="0" whiteSpaceShow="hide" eolShow="hide" borderWidth="2" smoothFont="no" />
+        <GUIConfig name="ScintillaPrimaryView" lineNumberMargin="show" bookMarkMargin="show" indentGuideLine="show" folderMarkStyle="box" lineWrapMethod="aligned" currentLineHilitingShow="show" scrollBeyondLastLine="no" disableAdvancedScrolling="no" wrapSymbolShow="hide" Wrap="yes" borderEdge="yes" edge="no" edgeNbColumn="80" zoom="3" zoom2="0" whiteSpaceShow="hide" eolShow="hide" borderWidth="2" smoothFont="no" />
         <GUIConfig name="DockingManager" leftWidth="200" rightWidth="200" topHeight="200" bottomHeight="200">
             <PluginDlg pluginName="AsmPlugin.dll" id="2" curr="3" prev="-1" isVisible="yes" />
             <ActiveTabs cont="0" activeTab="-1" />

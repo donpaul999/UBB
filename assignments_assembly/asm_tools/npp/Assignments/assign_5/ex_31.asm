@@ -1,3 +1,4 @@
+;Problem 29 not 31!
 ;A byte string S is given. Build the string D whose elements represent the sum of each two consecutive bytes of S.
 
 bits 32 ; assembling for the 32 bits architecture
