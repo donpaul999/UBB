@@ -6,7 +6,6 @@
         <Replace name="    " />
     </FindHistory>
     <History nbMaxFile="10" inSubMenu="no" customLength="-1">
-        <File filename="D:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template_ro_.asm" />
         <File filename="D:\DOCS\UBB\ASC\examples\template_en.asm" />
         <File filename="d:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template.asm" />
         <File filename="d:\DOCS\UBB\ASC\asm_tools\npp\Plugins\Config\asm_template_ro.asm" />
@@ -63,7 +62,7 @@
             <ActiveTabs cont="0" activeTab="-1" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
-            <ActiveTabs cont="3" activeTab="0" />
+            <ActiveTabs cont="3" activeTab="-1" />
         </GUIConfig>
     </GUIConfigs>
     <ProjectPanels>
