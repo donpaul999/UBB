@@ -14,7 +14,8 @@
         <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\exemplu.asm" />
         <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_4\ex_9.asm" />
         <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Test\ex_6.asm" />
-        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_6\ex_10.asm" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_5\ex_31.asm" />
+        <File filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_5\ex_5.asm" />
     </History>
     <GUIConfigs>
         <GUIConfig name="ToolBar" visible="yes">standard</GUIConfig>
@@ -23,7 +24,7 @@
         <GUIConfig name="ScintillaViewsSplitter">vertical</GUIConfig>
         <GUIConfig name="UserDefineDlg" position="undocked">hide</GUIConfig>
         <GUIConfig name="TabSetting" replaceBySpace="yes" size="4" />
-        <GUIConfig name="AppPosition" x="0" y="342" width="1100" height="700" isMaximized="yes" />
+        <GUIConfig name="AppPosition" x="311" y="171" width="1100" height="700" isMaximized="yes" />
         <GUIConfig name="noUpdate" intervalDays="15" nextUpdateDate="20080426">no</GUIConfig>
         <GUIConfig name="Auto-detection">yes</GUIConfig>
         <GUIConfig name="CheckHistoryFiles">no</GUIConfig>
@@ -62,7 +63,7 @@
             <ActiveTabs cont="0" activeTab="-1" />
             <ActiveTabs cont="1" activeTab="-1" />
             <ActiveTabs cont="2" activeTab="-1" />
-            <ActiveTabs cont="3" activeTab="-1" />
+            <ActiveTabs cont="3" activeTab="0" />
         </GUIConfig>
     </GUIConfigs>
     <ProjectPanels>
