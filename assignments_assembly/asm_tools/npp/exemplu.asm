@@ -14,12 +14,10 @@ segment code use32 class=CODE
 
 
 start:
-    push dword msg
-    call [printf]
-    add esp, 4
-
-    push dword 0
-    call [ExitProcess]
+    mov AX, 86h
+    cbw
+    mov BL, 2
+    div BL
 
 
 segment data use32 class=DATA

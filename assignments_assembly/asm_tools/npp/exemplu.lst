@@ -14,14 +14,12 @@
     14                                  
     15                                  
     16                                  start:
-    17 00000000 68[00000000]                push dword msg
-    18 00000005 FF15[00000000]              call [printf]
-    19 0000000B 83C404                      add esp, 4
-    20                                  
-    21 0000000E 6A00                        push dword 0
-    22 00000010 FF15[00000000]              call [ExitProcess]
-    23                                  
-    24                                  
-    25                                  segment data use32 class=DATA
-    26 00000000 4D6573616A210D0A00          msg: db "Mesaj!", 13, 10, 0
-    27                                      
+    17 00000000 66B88600                    mov AX, 86h
+    18 00000004 6698                        cbw
+    19 00000006 B302                        mov BL, 2
+    20 00000008 F6F3                        div BL
+    21                                  
+    22                                  
+    23                                  segment data use32 class=DATA
+    24 00000000 4D6573616A210D0A00          msg: db "Mesaj!", 13, 10, 0
+    25                                      
