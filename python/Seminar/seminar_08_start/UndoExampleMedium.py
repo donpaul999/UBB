@@ -67,4 +67,9 @@ def undoExampleMedium():
     undoController.redo()
     printReposWithMessage("1 redo, so Sophia is again deleted", clientRepo, None, None)
 
+#idea
+#implement a CascadeOperation class, which uses a list of Operations
+#in undo() you take each Operation and call undo() on it
+#redo() -> likewise
+
 undoExampleMedium()

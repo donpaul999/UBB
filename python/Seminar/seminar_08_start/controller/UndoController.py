@@ -4,14 +4,20 @@ class UndoController:
         self._history = []
         # Index of operation to undo/redo
         self._index = 0
+        # Are we during an undo/redo operation?
+        self._duringUndoRedo = False
+
 
     def recordOperation(self, operation):
         '''
         Record how to undo/redo a program operation
         '''
+        if self._duringUndoRedo == True:
+            return
 
-        if self._index < len(self._history):
-            self._history = self._history[:self._index]
+
+        #if self._index < len(self._history):
+         #   self._history = self._history[:self._index]
 
         self._history.append(operation)
         self._index += 1
@@ -20,17 +26,20 @@ class UndoController:
         if self._index == 0:
             raise ValueError("No more undos!")
 
+        self._duringUndoRedo = True
         self._index -= 1
         self._history[self._index].undo()
-
+        self._duringUndoRedo = False
 
 
     def redo(self):
         if self._index == len(self._history):
             raise ValueError("No more redos!")
 
+        self._duringUndoRedo = True
         self._history[self._index].redo()
         self._index += 1
+        self._duringUndoRedo = False
 
 
 
