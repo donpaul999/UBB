@@ -2,12 +2,35 @@ class UndoController:
     def __init__(self):
         # History of program operations (the undo-able ones)
         self._history = []
+        # Index of operation to undo/redo
+        self._index = 0
+
+    def recordOperation(self, operation):
+        '''
+        Record how to undo/redo a program operation
+        '''
+
+        if self._index < len(self._history):
+            self._history = self._history[:self._index]
+
+        self._history.append(operation)
+        self._index += 1
 
     def undo(self):
-        pass
+        if self._index == 0:
+            raise ValueError("No more undos!")
+
+        self._index -= 1
+        self._history[self._index].undo()
+
+
 
     def redo(self):
-        pass
+        if self._index == len(self._history):
+            raise ValueError("No more redos!")
+
+        self._history[self._index].redo()
+        self._index += 1
 
 
 
