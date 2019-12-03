@@ -7,7 +7,7 @@ from repository.PickleFileRepository import PickleFileRepository
 from repository.CarTextRepository import *
 from domain.Car import Car
 
-carRepo = CarTextRepository()
+carRepo = CarTextRepository('cars.txt')
 carRepo.store(Car(100, 'cj 01 uyc', 'Dacia', 'Duster'))
 carRepo.store(Car(102, 'cj 01 xyz', 'Dacia', 'Duster'))
 print(carRepo)
