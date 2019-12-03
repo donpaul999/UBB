@@ -59,7 +59,7 @@ class Repository:
         return len(self._objects)
 
     def __str__(self):
-        r = ""
+        r = "Repository" + "\n"
         for e in self._objects:
             r += str(e)
             r += "\n"
