@@ -56,7 +56,7 @@ class CarTextRepository(Repository):
     '''
     Save the car into a file
     '''
-    
+
     def _saveFile(self):
         pass
 
