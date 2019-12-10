@@ -8,7 +8,8 @@ Computer moves
     Lvl3 prevent player's 1-move wins
 '''
 
-from texttable import Texttable
+from texttable import Texttable #! THIS IS IMPORTANT FOR THIS CODE TO WORK - download texttable.py from here: https://github.com/foutaise/texttable
+                                # and insert it into lib folder
 
 
 class UI:
@@ -26,6 +27,7 @@ class Game: # a kind of controller/service
 class Board:
     def __init__(self):
         self._data = [0] * 9
+        self._moves = 0
         # empty square - 0
         # X - 1
         # O - -1
@@ -41,7 +43,25 @@ class Board:
             raise ValueError("Bad Symbol!")
 
         self._data[3 * x + y] = d[symbol]
+        self._moves += 1
 
+    def isWon(self):
+        #check rows and columns
+        for i in range(3):
+            row = self._data[3*i:3*i+3]
+            col = self._data[i:i+7:3]
+            if abs(sum(row)) == 3 or abs(sum(col)) == 3:
+                return True
+        d = self._data
+        if abs(d[0][0] + d[1][1] + d[2][2]) == 3:
+            return True
+        if abs(d[0][2] + d[1][1] + d[2][0]) == 3:
+            return True
+
+        return False
+
+    def isTie(self):
+        return self.isWon() == False and self._moves  == 9
 
     def __str__(self):
         t = Texttable()
@@ -56,6 +76,6 @@ class Board:
 
 b = Board()
 b.move(1,1,'X')
-b.move(0,0, 'O')
+b.move(0,0, 'X')
 b.move(2,2, 'X')
 print(b)
