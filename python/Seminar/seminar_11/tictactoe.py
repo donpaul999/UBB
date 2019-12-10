@@ -12,13 +12,6 @@ from texttable import Texttable #! THIS IS IMPORTANT FOR THIS CODE TO WORK - dow
                                 # and insert it into lib folder
 
 
-class UI:
-    def __init__(self, game):
-        self._game = game
-
-    def start(self):
-        pass
-
 
 #decide the computer's next move
 class SimpletonComputer:
@@ -39,6 +32,9 @@ class Game: # a kind of controller/service
 
     def playerMove(self, x, y):
         self._board.move(x,y,'X')
+
+    def getBoard(self):
+        return self._board
 
     def computerMove(self):
         move = self._computerPlayer.calculateMove(self._board)
@@ -100,6 +96,34 @@ class Board:
             t.add_row(row)
         return t.draw()
 
+
+class UI:
+    def __init__(self, game):
+        self._game = game
+
+    def _readPlayerMove(self):
+        # Return the (x,y) tuple that represents the player's move
+        # > 1 2
+        while True:
+            try:
+                cmd = input("Insert move:").split(" ")
+                return(int(cmd[0]), int(cmd[1]))
+            except Exception:
+                print("Invalid coordinates!")
+
+    def start(self):
+        b = self._game.getBoard()
+        playerMove = True
+        while b.isWon() == False and b.isTie() == False:
+            #while condition must be checked after each move
+            print(b)
+            if playerMove == True:
+                move = self._readPlayerMove()
+                self._game.playerMove(move[0], move[1])
+            else:
+                self._game.computerMove()
+
+            playerMove = not playerMove
 
 b = Board()
 ai = SimpletonComputer()
