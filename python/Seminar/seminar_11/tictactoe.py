@@ -13,16 +13,39 @@ from texttable import Texttable #! THIS IS IMPORTANT FOR THIS CODE TO WORK - dow
 
 
 class UI:
-    pass
+    def __init__(self, game):
+        self._game = game
 
-#decide the computer's next move
-class SimpletonComputer:
-    def calculateMove(self, ):
+    def start(self):
         pass
 
 
+#decide the computer's next move
+class SimpletonComputer:
+    def calculateMove(self, board):
+        #returns (x,y) fot computer move
+        for i in range(3):
+            for j in range(3):
+                if board.get(i, j) == 0:
+                    return(i, j)
+        raise ValueError("Board is full!")
+
+
+
 class Game: # a kind of controller/service
-    pass
+    def __init__(self, board, computerPlayer):
+        self._board = board
+        self._computerPlayer = computerPlayer
+
+    def playerMove(self, x, y):
+        self._board.move(x,y,'X')
+
+    def computerMove(self):
+        move = self._computerPlayer.calculateMove(self._board)
+        # computer must generate valid moves only
+        # this should raise no exceptions
+        self._board.move(move[0], move[1], 'O')
+
 
 class Board:
     def __init__(self):
@@ -31,6 +54,10 @@ class Board:
         # empty square - 0
         # X - 1
         # O - -1
+
+    def get(self, x, y):
+        # maybe transform to X, O
+        return self._data[3 * x + y]
 
     def move(self, x, y, symbol):
         #x, y in [0,1,2], symbol in [X,O]
@@ -53,9 +80,9 @@ class Board:
             if abs(sum(row)) == 3 or abs(sum(col)) == 3:
                 return True
         d = self._data
-        if abs(d[0][0] + d[1][1] + d[2][2]) == 3:
+        if abs(d[0] + d[4] + d[8]) == 3:
             return True
-        if abs(d[0][2] + d[1][1] + d[2][0]) == 3:
+        if abs(d[2] + d[4] + d[6]) == 3:
             return True
 
         return False
@@ -75,7 +102,15 @@ class Board:
 
 
 b = Board()
+ai = SimpletonComputer()
+g = Game(b, ai)
+ui = UI(g)
+ui.start()
+print(b)
+'''
 b.move(1,1,'X')
 b.move(0,0, 'X')
 b.move(2,2, 'X')
+print(b.isWon())
 print(b)
+'''
