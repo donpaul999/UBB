@@ -32,6 +32,16 @@ class SimpletonComputer:
                     return (i, j)
         raise ValueError("Board is full!")
 
+class SmarterComputer:
+    def __init__(self, randomMoveComputer):
+        pass
+
+    def calculateMove(self, board):
+        '''
+        1. Can I win the game?
+            Yes - make the winning move
+            No - call randomMoveComputer.calculateMove(board)
+        '''
 
 class Game: # a kind of controller/service
     def __init__(self, board, computerPlayer):
