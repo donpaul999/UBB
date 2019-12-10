@@ -11,18 +11,26 @@ Computer moves
 from texttable import Texttable #! THIS IS IMPORTANT FOR THIS CODE TO WORK - download texttable.py from here: https://github.com/foutaise/texttable
                                 # and insert it into lib folder
 
-
+import random
 
 #decide the computer's next move
-class SimpletonComputer:
+class RandomMoveComputer:
     def calculateMove(self, board):
-        #returns (x,y) fot computer move
+        candidates = []
         for i in range(3):
             for j in range(3):
                 if board.get(i, j) == 0:
-                    return(i, j)
-        raise ValueError("Board is full!")
+                    candidates.append((i, j))
+        return random.choice(candidates)
 
+class SimpletonComputer:
+    def calculateMove(self, board):
+        # returns (x,y) fot computer move
+        for i in range(3):
+            for j in range(3):
+                if board.get(i, j) == 0:
+                    return (i, j)
+        raise ValueError("Board is full!")
 
 
 class Game: # a kind of controller/service
@@ -118,19 +126,30 @@ class UI:
             #while condition must be checked after each move
             print(b)
             if playerMove == True:
-                move = self._readPlayerMove()
-                self._game.playerMove(move[0], move[1])
+                try:
+                    move = self._readPlayerMove()
+                    self._game.playerMove(move[0], move[1])
+                except Exception as e:
+                    print(e)
+                    continue
             else:
                 self._game.computerMove()
-
             playerMove = not playerMove
 
+        if b.isTie():
+            print("It's a draw!")
+        elif playerMove == False:
+            print("Congrats! You won!")
+        else:
+            print("You were defeated!")
+        print(b)
+
+
 b = Board()
-ai = SimpletonComputer()
+ai = RandomMoveComputer()
 g = Game(b, ai)
 ui = UI(g)
 ui.start()
-print(b)
 '''
 b.move(1,1,'X')
 b.move(0,0, 'X')
