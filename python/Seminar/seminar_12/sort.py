@@ -43,6 +43,17 @@ def mergeSort(data):
     right = mergeSort(data[:m])
     return merge(left, right)
 
+'''
+Binary Search
+
+T(n) = { 1, n = 1
+       { T(n / 2) + 1
+
+T(n) = T(n / 2) + 1
+     = T(n / (2^k)) + k , k = log(n) 
+     = log(n)
+
+'''
 
 data = list(range(10))
 random.shuffle(data)
