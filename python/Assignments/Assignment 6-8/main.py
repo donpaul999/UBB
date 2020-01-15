@@ -1,47 +1,106 @@
 #STUDENTS REGISTER MANAGEMENT
-
-from ui import UI
+import random
+from domain import *
+from Repo import *
+from ui import *
 from service import *
+from undo import *
+from TextRepository import *
+from PickleRepo import *
+from jsonRepo import *
+
+undoController = UndoController()
 
 
-s = Service()
-ui = UI(s)
+def load_properties(filepath, sep= "="):
+    '''
+    Read the file passed as parameter as a properties file
+    '''
+    props = {}
+    with open(filepath, "rt") as file:
+        for line in  file:
+            l = line.strip()
+            if len(l)!=0 :
+                key_value = l.split(sep)
+                key = key_value[0].strip()
+                value = key_value[1].strip()
+                props[key] = value
+    return props
 
-s.addStudent(Student(1,"Ana"))
-s.addStudent(Student(2,"Ciupe"))
-s.addStudent(Student(3,"Clapou"))
-s.addStudent(Student(4,"Dud"))
-s.addStudent(Student(5,"Ananas"))
-s.addStudent(Student(6,"Anat"))
-s.addStudent(Student(7,"Ioana"))
-s.addStudent(Student(8,"Andreea"))
-s.addStudent(Student(9,"Andrei"))
-s.addStudent(Student(10,"Alex"))
-
-
-s.addDiscipline(Discipline(1,"Maths"))
-s.addDiscipline(Discipline(2,"English"))
-s.addDiscipline(Discipline(3,"Chemistry"))
-s.addDiscipline(Discipline(4,"History"))
-s.addDiscipline(Discipline(5,"ASC"))
-s.addDiscipline(Discipline(6,"Fiziq"))
-s.addDiscipline(Discipline(7,"FP"))
-s.addDiscipline(Discipline(8,"DAT"))
-s.addDiscipline(Discipline(9,"Geometry"))
-s.addDiscipline(Discipline(10,"TTC"))
-
-
-s.addGrade(Grade(2, 1, 5))
-s.addGrade(Grade(2, 2, 10))
-s.addGrade(Grade(3, 7, 4))
-s.addGrade(Grade(4, 2, 1))
-s.addGrade(Grade(4, 2, 1))
-s.addGrade(Grade(6, 5, 9))
-s.addGrade(Grade(7, 5, 2))
-s.addGrade(Grade(8, 9, 2))
-s.addGrade(Grade(2, 4, 5))
-s.addGrade(Grade(10, 3, 10))
+def start_program():
+    props = load_properties("settings.properties")
+    if props['repository'] == 'inmemory':
+        studentRepo = Repository(undoController)
+        disciplineRepo = Repository(undoController)
+        gradeRepo = GradesRepository(undoController)
+    elif props['repository'] == 'CSV':
+        studentRepo = TextRepository(props['students'], 's',undoController)
+        disciplineRepo = TextRepository(props['disciplines'], 'd', undoController)
+        gradeRepo = GradesTextRepository(props['grades'], undoController, studentRepo._data, disciplineRepo._data)
+    elif props['repository'] == 'binary':
+        studentRepo = PickleRepo(props['students'], undoController)
+        disciplineRepo = PickleRepo(props['disciplines'], undoController)
+        gradeRepo = GradePickleRepo(props['grades'], undoController)
+    elif props['repository'] == 'json':
+        studentRepo = StudentsJsonRepository(props['students'], undoController)
+        disciplineRepo = DisciplinesJsonRepository(props['disciplines'], undoController)
+        gradeRepo= GradesJsonRepository(props['grades'], undoController)
+    else:
+        print("Repo type not avaliable")
 
 
+    studentService = StudentService(studentRepo)
+    disciplineService = DisciplineService(disciplineRepo)
+    gradeService = GradeService(gradeRepo, studentRepo, disciplineRepo, undoController)
+    service = Service()
 
-ui.start()
+    ui = UI(studentService, disciplineService, gradeService, service, undoController)
+    ui.start()
+
+start_program()
+
+'''
+last_name_list = [ 'Ciupe', 'Comsa', 'Curila', 'Colta', 'Curbat', 'Craciun', 'Comanac', 'Cheran', 'Chis', 'Chis', 'Copindean', 'Cimpean', 'Demian', 'Custura', 'Creta', 'Cioroga', 'Cosma', 'Condrea', 'Craiu', 'Ciorba', 'Capra', 'David', 'Caravia', 'Cirtorosan', 'Deiac', 'Clapou', 'Carare' ]
+first_name_list = [ 'Sergiu', 'Filip', 'Sebastian', 'Paul', 'Alexandra', 'Flaviu', 'Dragos', 'Bianca', 'Sergiu', 'Matei', 'Alex', 'Andreea', 'Ana', 'Octavian', 'Florin', 'Rares', 'Eduard', 'Adrian', 'Tiberiu', 'Rares', 'Paul', 'Catalin', 'Andrei', 'Dragos', 'David', 'Alexandru', 'Claudiu' ]
+classes = ['Maths', 'History', 'Chemistry', 'English', 'Fundamentals', 'ASC', 'French', 'Geometry', 'German', 'Logic']
+
+def GenerateStudents():
+    i = 0
+    while i < 10 :
+        id_nr = random.randint(0, 100)
+        pos = random.randint(0,len(last_name_list) - 1)
+        try:
+            studentRepo.add(Student(id_nr, last_name_list[pos] + " " +first_name_list[pos]))
+            last_name_list.pop(pos)
+            first_name_list.pop(pos)
+        except:
+            i -= 1
+        i += 1
+
+def GenerateDisciplines():
+    i = 0
+    list = []
+    while i < 10 :
+     id_nr = random.randint(0, 100)
+     pos = random.randint(0, len(classes) - 1)
+     try:
+         list.append = (Discipline(id_nr, classes[pos]))
+         classes.pop(pos)
+     except:
+         i -= 1
+    disciplineRepo.pstore(list, 'd')
+     i += 1
+
+def GenerateGrades():
+    for i in range(0, 10):
+        discipline = random.choice(disciplineRepo._data)
+        student = random.choice(studentRepo._data)
+        grade = random.randint(1,10)
+        gradesRepo.add(Grade(discipline.ID, student.ID, grade))
+    #print(gradesRepo._data)
+
+
+#GenerateStudents()
+#GenerateDisciplines()
+#GenerateGrades()
+'''

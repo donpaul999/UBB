@@ -1,97 +1,214 @@
 from domain import *
+from Repo import *
+
+class StudentService:
+    def __init__(self, studentRepo):
+        self._studentRepo = studentRepo
+
+    def add(self, object):
+        self._studentRepo.add(object)
+
+    def getAll(self):
+        return self._studentRepo.getAll()
+
+    def update(self, id, name):
+        try:
+            id = int(id)
+        except:
+            e = Exception()
+            e.PositiveID()
+        self._studentRepo.update(id, name)
+
+    def filter(self, sign, value):
+        self._studentRepo.filter(sign, value)
+
+    def sort(self, sign, type):
+        self._studentRepo.sort(sign, type)
+
+
+    def remove(self, id):
+        try:
+            id = int(id)
+        except:
+            e = Exception()
+            e.PositiveID()
+        self._studentRepo.remove(id)
+
+    def search_using_id(self, id):
+       return self._studentRepo.search_using_id(id)
+
+    def search_using_name(self, text):
+            return self._studentRepo.search_using_name(text)
+
+
+class DisciplineService:
+        def __init__(self, disciplineRepo):
+            self._disciplineRepo = disciplineRepo
+
+        def add(self, object):
+            self._disciplineRepo.add(object)
+
+        def getAll(self):
+            return self._disciplineRepo.getAll()
+
+        def filter(self, sign, value):
+            self._disciplineRepo.filter(sign, value)
+
+        def sort(self, sign, type):
+            self._disciplineRepo.sort(sign, type)
+
+        def remove(self, id):
+            try:
+                id = int(id)
+            except:
+                e = Exception()
+                e.PositiveID()
+            self._disciplineRepo.remove(id)
+
+        def update(self, id, name):
+            try:
+                id = int(id)
+            except:
+                e = Exception()
+                e.PositiveID()
+            self._disciplineRepo.update(id, name)
+
+        def search_using_id(self, id):
+            return self._disciplineRepo.search_using_id(id)
+
+        def search_using_name(self, text):
+            return self._disciplineRepo.search_using_name(text)
+
+class GradeService:
+        def __init__(self, gradeRepo, studentRepo, disciplineRepo, undoController):
+            self._gradeRepo = gradeRepo
+            self._studentRepo = studentRepo
+            self._disciplineRepo = disciplineRepo
+            self._undoController = undoController
+
+        def add(self, grade ,studentList, disciplineList):
+                self._gradeRepo.add(grade)
+
+        def getAll(self):
+            return self._gradeRepo.getAll()
+
+        def remove(self, id, type):
+            return self._gradeRepo.remove(id, type)
+
+        def removeStudent(self, type, id):
+            s = self._studentRepo.find(id)
+            if s is None:
+                e = Exception()
+                e.IDNotFound()
+            list = self._gradeRepo.remove(id, type)
+            undo1 = FunctionCall(self.add_grades, list)
+            redo1 = FunctionCall(self.remove, *(id, type))
+            op1 = Operation(undo1, redo1)
+            undo2 = FunctionCall(self._studentRepo.add, s)
+            redo2 = FunctionCall(self._studentRepo.remove, id)
+            op2 = Operation(undo2, redo2)
+            cascade = CascadeOperation(op1, op2)
+            self._undoController.recordOperation(cascade)
+            self._studentRepo.remove(id)
+
+        def removeDiscipline(self, type, id):
+            d = self._disciplineRepo.find(id)
+            if d is None:
+                e = Exception()
+                e.IDNotFound()
+            list = self._gradeRepo.remove(id, type)
+            undo1 = FunctionCall(self._gradeRepo.add_grades, list)
+            redo1 = FunctionCall(self._gradeRepo.remove, *(id, type))
+            op1 = Operation(undo1, redo1)
+            undo2 = FunctionCall(self._disciplineRepo.add, d)
+            redo2 = FunctionCall(self._disciplineRepo.remove, id)
+            op2 = Operation(undo2, redo2)
+            cascade = CascadeOperation(op1, op2)
+            self._undoController.recordOperation(cascade)
+            self._disciplineRepo.remove(id)
+
+        def add_grades(self, grades):
+            self._gradeRepo.add_grades(grades)
 
 class Service:
-    def __init__(self):
-        '''
-        Initialize the list of grades, of students and of disciplines
-        '''
-        self._students = []
-        self._disciplines = []
-        self._grades = []
 
-    def addStudent(self, student):
+    def failing_students(self, grades, students, disciplines):
         '''
-        Appends to the list a new student
+
+        :param grades: list of grades
+        :param students: list of students
+        :param disciplines: list of disciplines
+        :return: list of failed students
         '''
-        ok = 1
-        for i in self._students:
-            if student.studentId == i.studentId:
-                ok = 0
-                break
-        if ok == 1:
-            self._students.append(student)
+        list = []
+        for s in students:
+            for d in disciplines:
+                count = 0
+                sum = 0
+                for g in grades:
+                    if s.ID == g.studentId and d.ID == g.disciplineId:
+                        sum += g.Value
+                        count += 1
+                if count != 0:
+                    sum /= count
+                    if sum < 5:
+                        list.append({"Name":s.Name,"Disc":d.Name ,"Avg":sum})
+        if len(list) == 0:
+            e = Exception()
+            e.EmptyList()
         else:
-            raise ValueError("ID already used!")
+         return list
 
-    def addDiscipline(self, discipline):
+    def best_students(self, grades, students, disciplines):
+            list = []
+            for s in students:
+                avg = 0
+                count2 = 0
+                for d in disciplines:
+                    count = 0
+                    sum = 0
+                    for g in grades:
+                        if s.ID == g.studentId and d.ID == g.disciplineId:
+                            sum += g.Value
+                            count += 1
+                    if count != 0:
+                        sum /= count
+                        avg += sum
+                        count2 += 1
+                if count2 != 0:
+                    avg /= count2
+                if avg >= 5:
+                    list.append({"Name": s.Name, "Avg": avg})
+            list = sorted(list, key=lambda i: i["Avg"], reverse=True)
+            if len(list) == 0:
+                e = Exception()
+                e.EmptyList()
+            else:
+                return list
+
+    def best_classes(self, grades, students, disciplines):
         '''
-        Appends to the list a new discipline
+
+        :param grades: list of grades
+        :param students: list of students
+        :param disciplines: list of disciplines
+        :return: list of the disciplines descending ordered by the average of grades
         '''
-        ok = 1
-        for i in self._disciplines:
-            if discipline.disciplineId == i.disciplineId:
-                ok = 0
-                break
-        if ok == 1:
-            self._disciplines.append(discipline)
+        list = []
+        for d in disciplines:
+            count = 0
+            sum = 0
+            for s in students:
+                for g in grades:
+                    if s.ID == g.studentId and d.ID == g.disciplineId:
+                        sum += g.Value
+                        count += 1
+            if count != 0:
+                sum /= count
+                list.append({"Name": d.Name, "Avg": sum})
+        list = sorted(list, key=lambda i: i["Avg"], reverse=True)
+        if len(list) == 0:
+            e = Exception()
+            e.EmptyList()
         else:
-            raise ValueError("ID already used!")
-
-
-    def addGrade(self, grade):
-        self._grades.append(grade)
-       
-
-    def update_student(self, id, name):
-        ok = 0
-        for i in self._students:
-            if int(i.studentId) == int(id):
-                i.Name = name
-                ok = 1
-                break
-        if ok == 0:
-            raise ValueError("ID is not in the list!")
-
-    def update_discipline(self, id, name):
-        ok = 0
-        for i in self._disciplines:
-            if int(i.disciplineId) == int(id):
-                i.Name = name
-                ok = 1
-                break
-        if ok == 0:
-            raise ValueError("ID is not in the list!")
-    
-    def remove_student(self, id):
-        ok = 0
-        for i in self._students:
-            if i.studentId == int(id):
-                self.remove_grades_student(int(id))
-                self._students.remove(i)
-                ok = 1
-                break
-        if ok == 0:
-            raise ValueError("ID is not in the list!")
-
-    def remove_discipline(self, id):
-        ok = 0
-        for i in self._disciplines:
-            if i.disciplineId == int(id):
-                self.remove_grades_discipline(int(id))
-                self._disciplines.remove(i)
-                ok = 1
-                break
-        if ok == 0:
-            raise ValueError("ID is not in the list!")
-
-    def remove_grades_student(self, ID):
-        for i in self._grades:
-            if i.studentId == ID:
-                self._grades.remove(i)
-                break
-            
-    def remove_grades_discipline(self, ID):
-        for i in self._grades:
-            if i.disciplineId == ID:
-                self._grades.remove(i)
-                break
+            return list

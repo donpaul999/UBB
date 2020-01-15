@@ -1,28 +1,32 @@
+import unittest
+
 class Student:
     def __init__(self, sId, name):
-        self.studentId = sId
+        self.ID = sId
         self.Name = name
+        self.data = []
 
     def __repr__(self):
-        return "Student ID: " + str(self.studentId) + " Name: " + self.Name
+        return "Student ID: " + str(self.ID) + " Name: " + self.Name
     
     def __eq__(self, other):
-        return self.studentId == other.studentId
+        return self.ID == other.ID
+
 
     @property
-    def studentId(self):
+    def ID(self):
         return self._sId
     
-    @studentId.setter
-    def studentId(self, value):
+    @ID.setter
+    def ID(self, value):
+        e = Exception()
         try:
             value = int(value)
             if value <= 0:
-                raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
             self._sId = value
         except:
-            raise ValueError("The id must be a positive integer!")
-
+                e.PositiveID()
 
     @property
     def Name(self):
@@ -30,6 +34,7 @@ class Student:
     
     @Name.setter
     def Name(self, value):
+        e = Exception()
         ok = 1
         try:
             value = int(value)
@@ -42,35 +47,36 @@ class Student:
             if len(value) < 2:
                 ok = 0
         if ok == 0:
-            raise ValueError("The name must be a valid string!")
+            e.ValidName()
         else:
             self._name = value
     
 
 class Discipline:
     def __init__(self, dId, name):
-        self.disciplineId = dId
+        self.ID = dId
         self.Name = name
 
     def __repr__(self):
-        return "Discipline ID: " + str(self.disciplineId) + " Name: " + self.Name
+        return "Discipline ID: " + str(self.ID) + " Name: " + self.Name
 
     def __eq__(self, other):
-        return self.disciplineId == other.disciplineId
+        return self.ID == other.ID
 
     @property
-    def disciplineId(self):
+    def ID(self):
         return self._dId
     
-    @disciplineId.setter
-    def disciplineId(self, value):
+    @ID.setter
+    def ID(self, value):
+        e = Exception()
         try:
             value = int(value)
             if value <= 0:
-                raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
             self._dId = value
         except:
-            raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
 
     
     @property
@@ -80,13 +86,14 @@ class Discipline:
     @Name.setter
     def Name(self, value):
         ok = 1
+        e = Exception()
         try:
             value = int(value)
             ok = 0
         except:
             self._name = value
         if ok == 0:
-            raise ValueError("The name must be a valid string!")
+            e.ValidName()
     
 
 class Grade:
@@ -96,10 +103,10 @@ class Grade:
         self.Value = value
 
     def __eq__(self, other):
-        return self.studentId == other.studentId
+        return self.studentId == other.studentId and self.disciplineId == other.disciplineId and self.Value == other.Value
      
     def __repr__(self):
-        return "Discipline ID: " + str(self.disciplineId) + "Student ID: " + str(self.studentId) + " Grade: " + self.Value
+        return "Discipline ID: " + str(self.disciplineId) + " Student ID: " + str(self.studentId) + " Grade: " + str(self.Value)
     
     @property
     def disciplineId(self):
@@ -107,13 +114,14 @@ class Grade:
     
     @disciplineId.setter
     def disciplineId(self, value):
+        e = Exception()
         try:
             value = int(value)
             if value <= 0:
-                raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
             self._dId = value
         except:
-            raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
 
 
     @property
@@ -122,13 +130,14 @@ class Grade:
     
     @studentId.setter
     def studentId(self, value):
+        e = Exception()
         try:
             value = int(value)
             if value <= 0:
-                raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
             self._sId = value
         except:
-            raise ValueError("The id must be a positive integer!")
+                e.PositiveID()
 
     
     @property
@@ -137,42 +146,45 @@ class Grade:
     
     @Value.setter
     def Value(self, value):
+        e = Exception()
         try:
             value = int(value)
             if value < 0 or value > 10:
-                raise("The grade must be a positive integer between 1 and 10!")
+                e.GradeValue()
             else:
                 self._value = value
         except:
-            raise("The grade must be a positive integer between 1 and 10!")
+                e.GradeValue()
+        
 
+class Exception():
+    def IDNotFound(self):
+        raise ValueError("ID is not in the list")
+    def IDUsed(self):
+        raise ValueError("ID already used!")
+    def PositiveID(self):
+        raise ValueError("The id must be a positive integer!")
+    
+    def GradeValue(self):
+        raise ValueError("The grade must be a positive integer between 1 and 10!")
+    
+    def ValidName(self):
+        raise ValueError("The name must be a valid string!")
+    
+    def GradeNotValid(self):
+        raise ValueError("The ids are not valid for inserting the grade!")
 
+    def NameNotFound(self):
+        raise ValueError("Name is not in the list!")
 
+    def GradeValue(self):
+        raise  ValueError("Grade's value is not valid")
 
+    def EmptyList(self):
+        raise ValueError("There are no elements with this property!")
 
-def test_discipline():
-        d = Discipline(1,"test")
-        assert d.Name == "test"
-        assert d.disciplineId == 1
-        d.Name = "Chemistry"
-        assert d.Name == "Chemistry"
+    def Undo(self):
+        raise ValueError("No more undos!")
 
-
-def test_student():
-        st = Student(1,"test")
-        assert st.Name == "test"
-        assert st.studentId == 1
-        st.Name = "Ana"
-        assert st.Name == "Ana"
-
-def test_grade():
-        gr = Grade(2,1,7)
-        assert gr.Value == 7
-        assert gr.studentId == 1
-        gr.Value = 10
-        assert gr.Value == 10
-
-
-test_grade()
-test_student()
-test_discipline()
+    def Redo(self):
+        raise ValueError("No more redos!")
