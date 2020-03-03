@@ -1,5 +1,4 @@
 ﻿  Main.c
-  Repository.c
-\\Mac\Home\Desktop\GitHub\UBB\Semester 2\OOP\Seminars\Seminar_1\Seminar_1\Repository.c(22,13): warning C4013: 'strcmp' undefined; assuming extern returning int
+  Service.c
   Generating Code...
   Seminar_1.vcxproj -> \\Mac\Home\Desktop\GitHub\UBB\Semester 2\OOP\Seminars\Seminar_1\Debug\Seminar_1.exe

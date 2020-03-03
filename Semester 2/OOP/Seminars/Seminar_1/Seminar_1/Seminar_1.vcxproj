@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Repository.h" />
+    <ClInclude Include="Service.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c" />
     <ClCompile Include="Planet.c" />
     <ClCompile Include="Repository.c" />
+    <ClCompile Include="Service.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
