@@ -1,0 +1,7 @@
+﻿  ProjectEuler.cpp
+\\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\ProjectEuler\ProjectEuler.cpp(17,23): warning C4244: 'initializing': conversion from 'double' to '__int64', possible loss of data
+\\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\ProjectEuler\ProjectEuler.cpp(18,14): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+\\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\ProjectEuler\ProjectEuler.cpp(24,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type '__int64'
+\\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\ProjectEuler\ProjectEuler.cpp(24,12): message : consider using '%lld' in the format string
+\\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\ProjectEuler\ProjectEuler.cpp(24,12): message : consider using '%I64d' in the format string
+  ProjectEuler.vcxproj -> \\Mac\Home\Desktop\GitHub\OOP\ProjectEuler\Debug\ProjectEuler.exe

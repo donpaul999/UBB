@@ -1,9 +1,0 @@
-<NotepadPlus>
-    <Session activeView="0">
-        <mainView activeIndex="1">
-            <File firstVisibleLine="12" xOffset="0" scrollWidth="1521" startPos="850" endPos="827" selMode="0" lang="Assembly" encoding="-1" filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_6\ex_10.asm" backupFilePath="" originalFileLastModifTimestamp="1573542551" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
-            <File firstVisibleLine="12" xOffset="0" scrollWidth="1820" startPos="861" endPos="861" selMode="0" lang="Assembly" encoding="-1" filename="D:\GitHub\UBB\assignments_assembly\asm_tools\npp\Assignments\assign_6\ex_14.asm" backupFilePath="" originalFileLastModifTimestamp="1573984058" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="0" mapWrapIndentMode="-1" mapIsWrap="no" />
-        </mainView>
-        <subView activeIndex="0" />
-    </Session>
-</NotepadPlus>

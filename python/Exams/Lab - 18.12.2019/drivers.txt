@@ -1,5 +1,0 @@
-1,Alex
-2000,Ion
-3,Cristi
-20,Paul
-25,Andrei

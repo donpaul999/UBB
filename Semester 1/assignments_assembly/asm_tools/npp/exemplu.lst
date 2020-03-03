@@ -1,0 +1,25 @@
+     1                                  ; asamblare 			nasm -fobj exemplu.asm
+     2                                  ; linkeditare 			alink -oPE -subsys console -entry start exemplu.obj
+     3                                  ; depanare  			ollydbg exemplu.exe
+     4                                  ; programe necesare 	http://www.nasm.us + alink: alink.sourceforge.net/download.html + http://www.ollydbg.de
+     5                                  
+     6                                  bits 32
+     7                                  
+     8                                  global start
+     9                                  extern ExitProcess, printf
+    10                                  import ExitProcess kernel32.dll
+    11                                  import printf msvcrt.dll
+    12                                  
+    13                                  segment code use32 class=CODE
+    14                                  
+    15                                  
+    16                                  start:
+    17 00000000 66B88600                    mov AX, 86h
+    18 00000004 6698                        cbw
+    19 00000006 B302                        mov BL, 2
+    20 00000008 F6F3                        div BL
+    21                                  
+    22                                  
+    23                                  segment data use32 class=DATA
+    24 00000000 4D6573616A210D0A00          msg: db "Mesaj!", 13, 10, 0
+    25                                      
