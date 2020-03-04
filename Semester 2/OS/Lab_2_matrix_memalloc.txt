@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char**argv){
+ int i,j,sum = 0, n, m;
+ int **mat;
+ FILE *f;
+ f = fopen(argv[1], "r");
+ fscanf(f, "%d",&n);
+ fscanf(f, "%d",&m);
+ mat = malloc(sizeof(int*) * n);
+ for(i = 0; i < n; ++i){
+        mat[i] = malloc(sizeof(int) * m);
+        for(j = 0; j < m; ++j)
+                fscanf(f, "%d", &mat[i][j]);
+ }
+ for(i = 0; i < n; ++i){
+        for(j = 0; j < m; ++j)
+                sum += mat[i][j];
+        free(mat[i]);
+        }
+ free(mat);
+ fclose(f);
+ printf("%d", sum);
+ return 0;
+
+}

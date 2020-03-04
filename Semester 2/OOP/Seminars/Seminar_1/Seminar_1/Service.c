@@ -10,9 +10,9 @@ Service* createService(Repository* repo)
 
 void destroyService(Service* service)
 {
-	destroyRepository(service->repo);
+	destroyRepository(service->repo); //?
 	free(service);
-	service = 0;
+	//service = 0;
 }
 
 void addPlanetService(Service* service, char* name, char* type, double distance)
