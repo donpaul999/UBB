@@ -98,6 +98,8 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win32</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

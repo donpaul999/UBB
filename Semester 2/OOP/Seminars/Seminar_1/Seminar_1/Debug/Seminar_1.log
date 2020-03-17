@@ -1,4 +1,1 @@
-﻿  Main.c
-  Service.c
-  Generating Code...
-  Seminar_1.vcxproj -> \\Mac\Home\Desktop\GitHub\UBB\Semester 2\OOP\Seminars\Seminar_1\Debug\Seminar_1.exe
+﻿LINK : fatal error LNK1104: cannot open file 'vld.lib'
