@@ -43,6 +43,16 @@ void DynamicVector::add(const TElem& elem)
 	this->elems[this->size++] = elem;
 }
 
+iterator DynamicVector::begin()
+{
+	return iterator{ this->elems };
+}
+
+iterator DynamicVector::end()
+{
+	return iterator{this->elems + this->size};
+}
+
 void DynamicVector::resize()
 {
 	this->capacity *= 2;
@@ -51,3 +61,21 @@ void DynamicVector::resize()
 		aux[i] = this->elems[i];
 	delete[] this->elems;
 	this->elems = aux;
+
+	DynamicVector::iterator::iterator(TElem * ptr)
+	{
+
+	}
+
+	iterator DynamicVector::iterator::operator++()
+	{
+		this->ptr++;
+		return *this;
+	}
+
+	iterator DynamicVector::iterator::operator++(int i)
+	{
+		iterator aux = *this;
+		this->ptr++;
+		return aux;
+	}
