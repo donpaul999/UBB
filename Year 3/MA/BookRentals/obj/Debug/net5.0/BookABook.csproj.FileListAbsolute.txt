@@ -1,0 +1,156 @@
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/appsettings.Development.json
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/appsettings.json
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook.deps.json
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook.runtimeconfig.json
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook.runtimeconfig.dev.json
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/ref/BookABook.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/BookABook.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/EntityFramework.SqlServer.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/EntityFramework.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Humanizer.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.Identity.Core.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.Identity.Client.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.OpenApi.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.WebSockets.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Newtonsoft.Json.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.CodeDom.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.Configuration.ConfigurationManager.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.Runtime.Caching.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/System.Security.Cryptography.ProtectedData.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/sni.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/sni.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/sni.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.csproj.AssemblyReference.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.GeneratedMSBuildEditorConfig.editorconfig
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.AssemblyInfoInputs.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.AssemblyInfo.cs
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.csproj.CoreCompileInputs.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.MvcApplicationPartsAssemblyInfo.cs
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.MvcApplicationPartsAssemblyInfo.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/scopedcss/bundle/BookABook.styles.css
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/staticwebassets/BookABook.StaticWebAssets.Manifest.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.RazorTargetAssemblyInfo.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/ref/BookABook.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.pdb
+/Users/paulcolta/Downloads/Lab/BookRentals/obj/Debug/net5.0/BookABook.genruntimeconfig.cache
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/paulcolta/Downloads/Lab/BookRentals/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/appsettings.Development.json
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/appsettings.json
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook.deps.json
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook.runtimeconfig.json
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook.runtimeconfig.dev.json
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/ref/BookABook.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/BookABook.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/EntityFramework.SqlServer.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/EntityFramework.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Humanizer.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.Identity.Core.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.Identity.Client.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.OpenApi.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Microsoft.WebSockets.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Newtonsoft.Json.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.CodeDom.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.Configuration.ConfigurationManager.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.Runtime.Caching.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/System.Security.Cryptography.ProtectedData.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netcoreapp3.1/Microsoft.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-arm64/native/sni.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x64/native/sni.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win-x86/native/sni.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/bin/Debug/net5.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.csproj.AssemblyReference.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.GeneratedMSBuildEditorConfig.editorconfig
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.AssemblyInfoInputs.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.AssemblyInfo.cs
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.csproj.CoreCompileInputs.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.MvcApplicationPartsAssemblyInfo.cs
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.MvcApplicationPartsAssemblyInfo.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/scopedcss/bundle/BookABook.styles.css
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/staticwebassets/BookABook.StaticWebAssets.Manifest.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.RazorTargetAssemblyInfo.cache
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/ref/BookABook.dll
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.pdb
+/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/obj/Debug/net5.0/BookABook.genruntimeconfig.cache
