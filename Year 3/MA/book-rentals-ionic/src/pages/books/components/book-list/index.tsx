@@ -15,6 +15,7 @@ const BookList = ({ books, onClick }: Props) => {
                 key={book.id}
                 className={styles.itemContainer}
                 onClick={() => onClick && onClick(book)}>
+                <ByteImage byteSrc={book.image} />
                 <div className={styles.itemDetails}>
                     <div className={styles.row}>
                         <div>

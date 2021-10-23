@@ -21,5 +21,8 @@ namespace BookABook.Models
         public bool IsBooked { get; set; }
 
         public Guid UserId { get; set; }
+        
+        [Required]
+        public byte[] Image { get; set; }
     }
 }

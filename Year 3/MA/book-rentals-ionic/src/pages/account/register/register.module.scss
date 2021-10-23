@@ -7,6 +7,25 @@
         padding: 1rem;
     }
 
+    .applicationTitle {
+        font-weight: bold;
+        flex: 0;
+        flex-direction: row;
+        font-size: inherit;
+        color: inherit;
+    }
+
+    .largeText {
+        font-size: 1.75rem;
+        color: #111;
+    }
+
+    .row {
+        display: flex;
+        justify-content: baseline;
+        margin: 4em 0 3em;
+    }
+
     .centeredContainer {
         display: flex;
         flex-direction: column;

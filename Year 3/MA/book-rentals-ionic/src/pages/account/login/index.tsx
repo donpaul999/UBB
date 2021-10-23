@@ -35,7 +35,7 @@ const Login = () => {
             <IonContent fullscreen>
                 <div className={styles.centeredContainer}>
                     <div className={classNames(styles.row, styles.largeText)}>
-                        <IonTitle className={styles.applicationTitle}>Book A Book</IonTitle>
+                        <IonTitle className={styles.applicationTitle}>My books</IonTitle>
                     </div>
                     <IonTitle className={classNames(styles.logInText, styles.largeText)}>
                         Log in

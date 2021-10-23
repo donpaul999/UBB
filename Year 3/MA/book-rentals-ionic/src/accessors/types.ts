@@ -30,6 +30,7 @@ export interface Book {
     publishDate: string;
     isBooked: string;
     userId?: string;
+    image: string;
 }
 
 export const EMPTY_BOOK: Book = {
@@ -37,5 +38,6 @@ export const EMPTY_BOOK: Book = {
     name: "",
     author: "",
     publishDate: "0000-00-00",
-    isBooked: "false"
+    isBooked: "false",
+    image: ""
 }

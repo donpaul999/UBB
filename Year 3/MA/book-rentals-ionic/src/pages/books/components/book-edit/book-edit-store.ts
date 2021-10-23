@@ -60,6 +60,17 @@ export class BookEditStore {
         return true;
     }
 
+    public takePicture = async () => {
+        const cameraPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Base64,
+            source: CameraSource.Camera,
+            quality: 100
+        });
+        runInAction(() => {
+            this.book.image = cameraPhoto.base64String ?? "";
+        });
+    }
+
     public deleteBook = async () => {
         try {
             await deleteBook(this.book.id);

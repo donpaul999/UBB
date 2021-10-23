@@ -1,5 +1,5 @@
 import { IonContent, IonImg, IonPage, IonTitle } from "@ionic/react";
-import { Fab, IconButton, Tab, Tabs } from "@mui/material";
+import {Button, Fab, IconButton, Tab, Tabs} from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext } from "react";
 import SwipeableViews from "react-swipeable-views";
@@ -11,6 +11,7 @@ import { MainPageContext } from "./main-page-store";
 import BookEdit from "./components/book-edit";
 import { observer } from "mobx-react";
 import SignOutIcon from '@mui/icons-material/NoAccountsSharp';
+import NetworkStatusMessage from "./components/network-status";
 
 const MainPage = ({ allBooks, relatedBooks }: WithDataProvider) => {
     const {
@@ -30,10 +31,8 @@ const MainPage = ({ allBooks, relatedBooks }: WithDataProvider) => {
                 <div className={styles.pageContainer}>
                     <Box sx={{ borderBottom: 1, borderColor: "divider"}}>
                         <div className={styles.header}>
-                            <IonTitle className={styles.applicationTitle}>Book A Book</IonTitle>
-                            <IconButton onClick={signOut}>
-                                <SignOutIcon color="primary" />
-                            </IconButton>
+                            <IonTitle className={styles.applicationTitle}>My books</IonTitle>
+                            <Button onClick={signOut}>Log out</Button>
                         </div>
                         <Tabs
                             variant="fullWidth"
@@ -42,6 +41,7 @@ const MainPage = ({ allBooks, relatedBooks }: WithDataProvider) => {
                                 <Tab label="My books" value={0} />
                         </Tabs>
                     </Box>
+                    <NetworkStatusMessage />
                     <SwipeableViews
                         axis="x"
                         index={selectedTab}

@@ -26,7 +26,8 @@ import { Book } from "../../../../accessors/types";
 import styles from "./book-edit.module.scss";
 import { BookEditContext } from "./book-edit-store";
 import { observer } from "mobx-react";
-import { ConfirmationDialog } from "../../../../components";
+import {ByteImage, ConfirmationDialog} from "../../../../components";
+import {IonCard} from "@ionic/react";
 
 interface Props extends WithDataProvider {
     initialBook: Book | null;
@@ -53,7 +54,8 @@ const BookEdit = ({ initialBook, onClose }: Props) => {
         saveBook,
         deleteBook,
         setCloseConfirmation,
-        setDeleteConfirmation
+        setDeleteConfirmation,
+        takePicture
     } = useContext(BookEditContext);
 
     useEffect(() => initializeBook(initialBook),
@@ -131,6 +133,16 @@ const BookEdit = ({ initialBook, onClose }: Props) => {
                             checked={book.isBooked === "true"}
                             onChange={e => setBooked(e.target.checked)} />
                     } />
+                <ByteImage byteSrc={book.image} />
+                <div className={styles.row}>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={takePicture}
+                        startIcon={<CameraIcon />}>
+                        Take picture
+                    </Button>
+                </div>
             </div>
             {!isAdd && (
                 <Fab

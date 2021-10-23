@@ -9,7 +9,7 @@ import { RegisterContext } from "./register-store";
 import { useHistory } from "react-router";
 
 const Register = () => {
-    const { goBack } = useHistory();
+    const { push } = useHistory();
 
     const {
         user,
@@ -31,10 +31,10 @@ const Register = () => {
         <IonPage>
             <IonContent fullscreen>
                 <div className={styles.mainContainer}>
-                    <IconButton className={styles.backButton} onClick={goBack}>
-                        <ArrowBack color="primary" />
-                    </IconButton>
                     <div className={styles.centeredContainer}>
+                        <div className={classNames(styles.row, styles.largeText)}>
+                            <IonTitle className={styles.applicationTitle}>My books</IonTitle>
+                        </div>
                         <IonTitle className={classNames(styles.logInText, styles.largeText)}>
                             Register
                         </IonTitle>
@@ -67,14 +67,21 @@ const Register = () => {
                                 {errorMessage}
                             </Alert>
                         )}
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className={styles.registerButton}
-                            disabled={!user.email || !user.password || !user.confirmPassword}
-                            onClick={register}>
-                            Create account
-                        </Button>
+                        <div className={classNames(styles.row)}>
+                            <Button
+                                className={styles.registerButton}
+                                onClick={() => push("/login")}>
+                                Log in
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                className={styles.registerButton}
+                                disabled={!user.email || !user.password || !user.confirmPassword}
+                                onClick={register}>
+                                Create account
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </IonContent>

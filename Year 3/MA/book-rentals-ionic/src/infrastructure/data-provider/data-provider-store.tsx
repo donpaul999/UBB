@@ -86,7 +86,6 @@ export class DataProviderStore {
 
     private handleUpdateChange = (book: Book) => {
         const isRelated = book.userId === authorizedStore.userId;
-        console.log(isRelated, book.userId, authorizedStore.userId);
         const [updatedList, bookToUpdate] = updateInList(
             isRelated ? this.relatedBooks : this.allBooks,
             book,
