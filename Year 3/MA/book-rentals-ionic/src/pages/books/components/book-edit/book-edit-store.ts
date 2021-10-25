@@ -6,7 +6,7 @@ import {
     CameraResultType,
     CameraSource
   } from "@capacitor/camera";
-import { addBook, deleteBook, updateBook } from "../../../../accessors/book-accessor";
+import { addBook, deleteBook, updateBook } from "../../../../accessors/book-accessor-online";
 import {AuthenticationStorage, toastServiceStore} from "../../../../infrastructure";
 
 export class BookEditStore {
@@ -50,7 +50,13 @@ export class BookEditStore {
         const api = this.isAdd ? addBook : updateBook;
 
         try {
-            await api(this.book);
+            const online = await api(this.book);
+
+            if (online) {
+                toastServiceStore.showSuccess("Operation successful!");
+            } else {
+                toastServiceStore.showWarning("Book saved to local storage!");
+            }
         } catch {
             toastServiceStore.showError("Something went wrong, the server could not save the book, try again!");
             return false;
@@ -73,7 +79,13 @@ export class BookEditStore {
 
     public deleteBook = async () => {
         try {
-            await deleteBook(this.book.id);
+            const online = await deleteBook(this.book.id);
+
+            if (online) {
+                toastServiceStore.showSuccess("Operation successful!");
+            } else {
+                toastServiceStore.showWarning("Book removed in local storage!");
+            }
         } catch {
             toastServiceStore.showError("Something went wrong, the server could not delete the book, try again!");
             return false;

@@ -1,17 +1,60 @@
-import { API_PATH_BOOKS, BASE_HTTP_URL } from "./constants";
-import { httpDelete, httpGet, httpPost, httpPut } from "./helper-functions";
+import { SyncStorage } from "../infrastructure";
+import { networkStatusStore } from "../infrastructure/network-status/network-status-store";
+import OfflineBookAccessor from "./book-accessor-offline";
+import OnlineBookAccessor from "./book-accessor-online";
 import { Book } from "./types";
 
-const BASE_CAR_URL = BASE_HTTP_URL + API_PATH_BOOKS;
+export const getRelatedBooks = async () => {
+    if (!isOnline()) {
+        return OfflineBookAccessor.getRelatedBooks();
+    }
 
-export const getAvailableBooks = () => httpGet<Book[]>(`${BASE_CAR_URL}/available`);
+    const books = await OnlineBookAccessor.getRelatedBooks();
+    await OfflineBookAccessor.setRelatedBooks(books);
+    return books;
+}
 
-export const getAllBooks = () => httpGet<Book[]>(`${BASE_CAR_URL}`);
+export const addBook = async (book: Book) => {
+    if (isOnline()) {
+        await OnlineBookAccessor.addBook(book);
+        return true;
+    }
 
-export const getRelatedBooks = () => httpGet<Book[]>(`${BASE_CAR_URL}/related`);
+    await SyncStorage.queueCreate(book);
+    await OfflineBookAccessor.addBook(book);
+    return false;
+}
 
-export const addBook = (book: Book) => httpPost(BASE_CAR_URL, book);
+export const updateBook = async (book: Book) => {
+    if (isOnline()) {
+        await OnlineBookAccessor.updateBook(book);
+        return true;
+    }
 
-export const updateBook = (book: Book) => httpPut(BASE_CAR_URL, book);
+    await SyncStorage.queueUpdate(book);
+    await OfflineBookAccessor.updateBook(book);
+    return false;
+}
 
-export const deleteBook = (bookId: number) => httpDelete(`${BASE_CAR_URL}/${bookId}`);
+export const deleteBook = async (bookId: number) => {
+    if (isOnline()) {
+        await OnlineBookAccessor.deleteBook(bookId);
+        return true;
+    }
+
+    await SyncStorage.queueDelete(bookId);
+    await OfflineBookAccessor.deleteBook(bookId);
+    return false;
+}
+
+export const syncChanges = async () => {
+    const changes = await SyncStorage.getChanges();
+    if (!changes?.length) {
+        return;
+    }
+
+    const idMapping = await OnlineBookAccessor.syncChanges(changes);
+    await OfflineBookAccessor.updateIds(idMapping);
+}
+
+const isOnline = () => networkStatusStore.isConnected;

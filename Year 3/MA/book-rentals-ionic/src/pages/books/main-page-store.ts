@@ -11,8 +11,6 @@ export class MainPageStore {
         makeAutoObservable(this);
     }
 
-    public setSelectedTab = (tabIndex: number) => this.selectedTab = tabIndex;
-
     public showAddDialog = () => this.bookToEdit = EMPTY_BOOK;
 
     public closeDialog = () => this.bookToEdit = null;

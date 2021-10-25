@@ -4,10 +4,9 @@ import { authorizedStore, BuildWebSocket, toastServiceStore } from "..";
 import {
     addBook,
     deleteBook, getAllBooks,
-    getAvailableBooks,
     getRelatedBooks,
     updateBook
-} from "../../accessors/book-accessor";
+} from "../../accessors/book-accessor-online";
 import { Book } from "../../accessors/types";
 import { addToList, removeFromList, updateInList } from "../../shared/array-helpers";
 
@@ -36,11 +35,11 @@ export class DataProviderStore {
         return this.getBooks();
     }
 
-    private getBooks = () => {
+    private getBooks = () => setTimeout(() => {
         this.getAvailableBooks();
         this.getRelatedBooks();
         return this.subscribeToChanges();
-    }
+    }, 100);
 
     private subscribeToChanges = async () => {
         const unsubscribe = await BuildWebSocket()

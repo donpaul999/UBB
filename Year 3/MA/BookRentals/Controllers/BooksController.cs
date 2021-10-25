@@ -1,4 +1,5 @@
-﻿using BookABook.Extensions;
+﻿using System.Collections.Generic;
+using BookABook.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -91,6 +92,12 @@ namespace BookABook.Controllers
             using var webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync("access_token");
 
             await broadcastHandler.AddConnection(webSocket);
+        }
+        
+        [HttpPost("sync")]
+        public IActionResult SyncBooks(List<Change<Book>> changedBooks)
+        {
+            return Ok(bookService.MapChanges(changedBooks));
         }
     }
 }

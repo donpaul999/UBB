@@ -1,7 +1,6 @@
 .pageContainer {
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     & > div:nth-child(3) {
         flex-grow: 1;

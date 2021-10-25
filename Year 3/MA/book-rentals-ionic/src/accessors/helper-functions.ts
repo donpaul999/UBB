@@ -5,7 +5,6 @@ type httpMethod = "GET" | "POST" | "PUT" | "DELETE";
 const genericFetch = <T>(method: httpMethod, url: string, body?: any) =>
     new Promise<T>(async (resolve, reject) => {
         const storedValues = await AuthenticationStorage.get();
-
         try {
             const response = await fetch(url, {
                 method,
@@ -16,7 +15,11 @@ const genericFetch = <T>(method: httpMethod, url: string, body?: any) =>
                 body: JSON.stringify(body)
             });
             if (response.status / 100 === 2) {
-                resolve(await response.json());
+                try {
+                    resolve(await response.json());
+                } catch (e) {
+                    resolve(undefined as any);
+                }
                 return;
             }
             reject(response.status);

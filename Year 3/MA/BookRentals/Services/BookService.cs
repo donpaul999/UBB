@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookABook.BookChanges;
 using BookABook.Models;
 
 namespace BookABook.Services
@@ -21,6 +22,7 @@ namespace BookABook.Services
 
         public Book Create(Book book)
         {
+            book.UserId = httpContextAccessor.GetUserId();
             try
             {
                 context.Books.Add(book);
@@ -59,7 +61,10 @@ namespace BookABook.Services
                 .Where(book => book.Id == bookUpdate.Id)
                 .AsNoTracking()
                 .FirstOrDefault();
-
+            
+            if (bookUpdate.UserId == Guid.Empty)
+                bookUpdate.UserId = httpContextAccessor.GetUserId();
+            
             if (initialBook == null || initialBook.UserId != bookUpdate.UserId)
                 return null;
 
@@ -81,6 +86,73 @@ namespace BookABook.Services
             context.SaveChanges();
             
             return book;
+        }
+        
+        public List<IdMap> MapChanges(List<Change<Book>> bookChanges)
+        {
+            var bookIdMapping = new List<IdMap>();
+
+            foreach (var bookChange in bookChanges)
+            {
+                var idMap = MapChange(bookChange, bookIdMapping);
+                if (idMap != null)
+                    bookIdMapping.Add(idMap);
+            }
+
+            return bookIdMapping;
+        }
+
+        private IdMap MapChange(Change<Book> bookChange, List<IdMap> idMapping)
+        {
+            var book = bookChange.Payload;
+
+            return bookChange.Type switch
+            {
+                ChangeType.Create => MapCreateChange(book),
+                ChangeType.Update => MapUpdateChange(book, idMapping),
+                ChangeType.Delete => MapDeleteChange(book),
+                _ => null
+            };
+        }
+
+        private IdMap MapCreateChange(Book book)
+        {
+            if (book.Id > 0)
+                return null;
+
+            var initialId = book.Id;
+            book.Id = 0;
+            var addedCar = Create(book);
+
+            return new() {
+                From = initialId,
+                To = addedCar.Id
+            };
+        }
+
+        private IdMap MapUpdateChange(Book book, List<IdMap> idMapping)
+        {
+            if (book.Id > 0)
+            {
+                Update(book);
+                return null;
+            }
+
+            var actualId = idMapping.FirstOrDefault(mapping => mapping.From == book.Id);
+            if (actualId == null)
+                return null;
+
+            book.Id = actualId.To;
+            Update(book);
+            return null;
+        }
+
+        private IdMap MapDeleteChange(Book book)
+        {
+            if (book.Id > 0)
+                Delete(book.Id);
+
+            return null;
         }
     }
 }

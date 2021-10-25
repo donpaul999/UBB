@@ -6,7 +6,6 @@ import { DataProviderContext } from "./data-provider-store";
 type BookParameterFunction = (book: Book) => Promise<void>;
 
 export interface WithDataProvider {
-    allBooks: Book[];
     relatedBooks: Book[];
     addBook: BookParameterFunction;
     updateBook: BookParameterFunction;

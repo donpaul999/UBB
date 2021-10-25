@@ -14,6 +14,7 @@ const Register = () => {
     const {
         user,
         errorMessage,
+        successMessage,
         setEmail,
         setPassword,
         setConfirmPassword,
@@ -47,7 +48,7 @@ const Register = () => {
                         <TextField
                             label="Password"
                             type="password"
-                            helperText="Should contain a small letter, capital letter, digit and special symbol"
+                            helperText="Password shall contain a small letter, a capital letter, a digit and a special symbol."
                             className={styles.inputPassword}
                             value={user.password}
                             onChange={e => setPassword(e.target.value)} />
@@ -65,6 +66,14 @@ const Register = () => {
                                 className={styles.alertContainer}>
                                 <AlertTitle><strong>Error</strong></AlertTitle>
                                 {errorMessage}
+                            </Alert>
+                        )}
+                        {successMessage && (
+                            <Alert
+                                severity="success"
+                                className={styles.alertContainer}>
+                                <AlertTitle><strong>Success!</strong></AlertTitle>
+                                {successMessage}
                             </Alert>
                         )}
                         <div className={classNames(styles.row)}>

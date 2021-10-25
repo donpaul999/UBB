@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BookABook.BookChanges;
 using BookABook.Models;
 
 namespace BookABook.Services
@@ -16,5 +17,7 @@ namespace BookABook.Services
         Book Update(Book book);
 
         Book Delete(int id);
+        
+        List<IdMap> MapChanges(List<Change<Book>> carChanges);
     }
 }

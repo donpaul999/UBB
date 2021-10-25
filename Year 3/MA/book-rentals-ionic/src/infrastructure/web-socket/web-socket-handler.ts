@@ -1,6 +1,7 @@
 import { BASE_WS_URL } from "../../accessors/constants";
 import { getProtocol } from "../../accessors/helper-functions";
-import { Change, ChangeType, WebSocketListener } from "./types";
+import { WebSocketListener } from "./types";
+import { Change, ChangeType } from "../../accessors/types";
 
 const WebSocketHandler = async (
     createListener: WebSocketListener,

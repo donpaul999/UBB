@@ -8,6 +8,7 @@ export class RegisterStore {
     public user: RegisterUser = EMPTY_REGISTER_USER;
     public isLoading = false;
     public errorMessage = "";
+    public successMessage = ""
 
     constructor() {
         makeAutoObservable(this);
@@ -23,9 +24,11 @@ export class RegisterStore {
     public register = async () => {
         this.isLoading = true;
         let error = "";
-        
+        let successMessage = "";
+
         try {
             await register(this.user);
+            successMessage = "Register successful! Return to log in.";
         } catch (exception: any) {
             if (isString(exception)) {
                 error = exception;
@@ -36,6 +39,7 @@ export class RegisterStore {
             }
         } finally {
             runInAction(() => {
+                this.successMessage = successMessage;
                 this.errorMessage = error;
                 this.isLoading = false;
             });

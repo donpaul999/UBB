@@ -44,7 +44,6 @@ const BookEdit = ({ initialBook, onClose }: Props) => {
         isAdd,
         showCloseConfirmation,
         showDeleteConfirmation,
-
         initializeBook,
         setName,
         setAuthor,
