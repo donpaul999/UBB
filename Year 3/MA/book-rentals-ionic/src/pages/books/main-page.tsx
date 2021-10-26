@@ -1,4 +1,4 @@
-import { IonContent, IonImg, IonPage, IonTitle } from "@ionic/react";
+import {IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonPage, IonTitle} from "@ionic/react";
 import {Button, Fab, IconButton, Tab, Tabs} from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext } from "react";
@@ -11,8 +11,9 @@ import BookEdit from "./components/book-edit";
 import { observer } from "mobx-react";
 import NetworkStatusMessage from "./components/network-status";
 import {Logout} from "@mui/icons-material";
+import FilterBar from "./components/filter";
 
-const MainPage = ({ relatedBooks }: WithDataProvider) => {
+const MainPage = ({ relatedBooks, disabledScroll, fetchRelatedBooks }: WithDataProvider) => {
     const {
         bookToEdit,
         showAddDialog,
@@ -20,6 +21,12 @@ const MainPage = ({ relatedBooks }: WithDataProvider) => {
         closeDialog,
         signOut
     } = useContext(MainPageContext);
+
+    const handleOnScroll = async (event: any) => {
+        await fetchRelatedBooks();
+
+        event.target.complete();
+    }
 
     return (
         <IonPage>
@@ -32,7 +39,13 @@ const MainPage = ({ relatedBooks }: WithDataProvider) => {
                         </div>
                     </Box>
                     <NetworkStatusMessage />
+                    <FilterBar/>
                     <BookList books={relatedBooks} onClick={(book) => showEditDialog(book)}/>
+                    <IonInfiniteScroll
+                        disabled={disabledScroll}
+                        onIonInfinite={e => handleOnScroll(e as any)}>
+                        <IonInfiniteScrollContent />
+                    </IonInfiniteScroll>
                     <Fab
                         className={styles.addButton}
                         onClick={() => showAddDialog()}>

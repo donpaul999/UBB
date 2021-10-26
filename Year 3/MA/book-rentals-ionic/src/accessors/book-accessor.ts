@@ -4,12 +4,11 @@ import OfflineBookAccessor from "./book-accessor-offline";
 import OnlineBookAccessor from "./book-accessor-online";
 import { Book } from "./types";
 
-export const getRelatedBooks = async () => {
+export const getRelatedBooks = async (search: string, isBooked: boolean | null, start: number, count: number) => {
     if (!isOnline()) {
-        return OfflineBookAccessor.getRelatedBooks();
+        return OfflineBookAccessor.getRelatedBooks(search, isBooked, start, count);
     }
-
-    const books = await OnlineBookAccessor.getRelatedBooks();
+    const books = await OnlineBookAccessor.getRelatedBooks(search, isBooked, start, count);
     await OfflineBookAccessor.setRelatedBooks(books);
     return books;
 }
@@ -19,7 +18,6 @@ export const addBook = async (book: Book) => {
         await OnlineBookAccessor.addBook(book);
         return true;
     }
-
     await SyncStorage.queueCreate(book);
     await OfflineBookAccessor.addBook(book);
     return false;
@@ -38,9 +36,11 @@ export const updateBook = async (book: Book) => {
 
 export const deleteBook = async (bookId: number) => {
     if (isOnline()) {
+        console.log("online del!");
         await OnlineBookAccessor.deleteBook(bookId);
         return true;
     }
+    console.log("offline del!");
 
     await SyncStorage.queueDelete(bookId);
     await OfflineBookAccessor.deleteBook(bookId);

@@ -6,7 +6,7 @@ import {
     CameraResultType,
     CameraSource
   } from "@capacitor/camera";
-import { addBook, deleteBook, updateBook } from "../../../../accessors/book-accessor-online";
+import { addBook, deleteBook, updateBook } from "../../../../accessors/book-accessor";
 import {AuthenticationStorage, toastServiceStore} from "../../../../infrastructure";
 
 export class BookEditStore {

@@ -26,7 +26,10 @@ const queueUpdate = async (book: Book) => {
 }
 
 const queueDelete = async (bookId: number) => {
+    console.log("sync offline del!");
+
     let queue = await LocalStorage.get<Change[]>(SYNC_BOOKS_STORAGE_KEY) || [];
+    console.log("sync offline del2!");
 
     if (bookId > 0) {
         queue.push({
@@ -36,10 +39,13 @@ const queueDelete = async (bookId: number) => {
                 id: bookId
             }
         })
+        console.log(queue);
+        console.log("sync offline del4!");
     } else {
         queue = queue.filter(({ payload }) => payload.id !== bookId);
     }
 
+    console.log("sync offline del6!");
     await LocalStorage.set(SYNC_BOOKS_STORAGE_KEY, queue);
 }
 

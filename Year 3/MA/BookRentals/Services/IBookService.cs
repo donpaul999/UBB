@@ -10,7 +10,7 @@ namespace BookABook.Services
 
         List<Book> GetAvailable();
 
-        List<Book> GetRelated();
+        List<Book> GetRelated(string searchKeyword, bool? isBooked, int from, int count);
 
         Book Create(Book book);
 

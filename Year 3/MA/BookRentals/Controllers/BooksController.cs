@@ -63,9 +63,9 @@ namespace BookABook.Controllers
         }
 
         [HttpGet("related")]
-        public IActionResult GetRelatedBooks()
+        public IActionResult GetRelatedBooks(string searchKeyword, bool? isBooked, int from, int count)
         {
-            return Ok(bookService.GetRelated());
+            return Ok(bookService.GetRelated(searchKeyword, isBooked, from, count));
         }
 
         [HttpDelete("{id}")]

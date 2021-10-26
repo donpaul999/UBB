@@ -48,11 +48,26 @@ namespace BookABook.Services
             return context.Books.Where(book => book.UserId != userId).ToList();
         }
 
-        public List<Book> GetRelated()
+        public List<Book> GetRelated(string searchKeyword, bool? isBooked, int from, int count)
         {
             var userId = httpContextAccessor.GetUserId();
 
-            return context.Books.Where(book => book.UserId == userId).ToList();
+            var books = context.Books.Where(car => car.UserId == userId);
+
+            if (!string.IsNullOrWhiteSpace(searchKeyword))
+                books = books.Where(book =>
+                    book.Name.ToLower().Contains(searchKeyword.ToLower()) ||
+                    book.Author.ToLower().Contains(searchKeyword.ToLower()));
+
+            if (isBooked != null)
+                books = books.Where(book => book.IsBooked == isBooked);
+
+            if (count < 1)
+                return books.ToList();
+
+            return books.Skip(from)
+                .Take(count)
+                .ToList();
         }
 
         public Book Update(Book bookUpdate)

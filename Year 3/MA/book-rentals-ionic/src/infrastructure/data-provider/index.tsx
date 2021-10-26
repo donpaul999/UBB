@@ -10,6 +10,12 @@ export interface WithDataProvider {
     addBook: BookParameterFunction;
     updateBook: BookParameterFunction;
     deleteBook: BookParameterFunction;
+    disabledScroll: boolean;
+    search: string;
+    bookFilter: boolean | null;
+    fetchRelatedBooks: () => Promise<void>;
+    setSearch: (search: string) => void;
+    setBookFilter: (isAutomatic: boolean | null) => void;
 }
 
 function withDataProvider<T extends WithDataProvider>(WrappedComponent: FC<T>) {

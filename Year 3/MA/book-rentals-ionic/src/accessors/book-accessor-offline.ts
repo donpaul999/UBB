@@ -3,7 +3,22 @@ import { Book, IdMap } from "./types";
 
 const FIRST_TEMPORARY_ID = -1;
 
-export const getRelatedBooks = () => RelatedBooksStorage.get();
+export const getRelatedBooks = async (search: string, isBooked: boolean | null, start: number, count: number) => {
+    let allBooks = await RelatedBooksStorage.get();
+
+    if (search) {
+        allBooks = allBooks.filter(book =>
+            book.name.toLowerCase().includes(search.toLowerCase()) ||
+            book.author.toLowerCase().includes(search.toLowerCase()));
+    }
+
+    if (isBooked !== null) {
+        const isBookedString = isBooked ? "true" : "false";
+        allBooks = allBooks.filter(book => book.isBooked === isBookedString);
+    }
+
+    return allBooks.slice(start, start + count);
+}
 
 export const setRelatedBooks = async (books: Book[]) => {
     const existingBooks = await RelatedBooksStorage.get();
@@ -33,7 +48,6 @@ export const updateBook = async (book: Book) => {
 
 export const deleteBook = async (bookId: number) => {
     const books = await RelatedBooksStorage.get();
-
     const indexOfModifiedBook = getIndexOfBook(books, bookId);
     books.splice(indexOfModifiedBook, 1);
 
@@ -84,7 +98,7 @@ const OfflineBookAccessor = {
     addBook,
     updateBook,
     deleteBook,
-    updateIds
+    updateIds,
 }
 
 export default OfflineBookAccessor;

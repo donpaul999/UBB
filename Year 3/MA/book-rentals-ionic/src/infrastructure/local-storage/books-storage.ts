@@ -2,7 +2,13 @@ import { LocalStorage } from "..";
 import { Book } from "../../accessors/types";
 
 export const BooksStorage = (key: string) => ({
-    set: (books: Book[]) => LocalStorage.set<Book[]>(key, books),
+    set: async (books: Book[]) => {
+        try {
+            await LocalStorage.set<Book[]>(key, books);
+        } catch (exception) {
+            console.error(exception);
+        }
+    },
     get: async () => await LocalStorage.get<Book[]>(key) || [],
     clear: () => LocalStorage.remove(key),
 });

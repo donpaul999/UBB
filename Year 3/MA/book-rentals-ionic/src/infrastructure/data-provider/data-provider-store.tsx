@@ -3,18 +3,25 @@ import { createContext } from "react";
 import { authorizedStore, BuildWebSocket, toastServiceStore } from "..";
 import {
     addBook,
-    deleteBook, getAllBooks,
-    getRelatedBooks,
+    deleteBook,
+    getRelatedBooks, syncChanges,
     updateBook
-} from "../../accessors/book-accessor-online";
+} from "../../accessors/book-accessor";
 import { Book } from "../../accessors/types";
 import { addToList, removeFromList, updateInList } from "../../shared/array-helpers";
+import {networkStatusStore} from "../network-status/network-status-store";
+
+const PAGINATION_COUNT = 4;
 
 export class DataProviderStore {
     public allBooks: Book[] = []
     public relatedBooks: Book[] = []
     private isInitialized = false
+    public disabledScroll: boolean = false;
+    public search: string = "";
+    public bookFilter: boolean | null = null;
     private unsubscribe = () => {};
+    private start = 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -32,11 +39,16 @@ export class DataProviderStore {
         }
 
         this.isInitialized = true;
-        return this.getBooks();
+
+        networkStatusStore.onConnectionChange = connected => {
+            if (connected)
+                syncChanges();
+        }
+        this.getBooks();
+        return this.subscribeToChanges();
     }
 
     private getBooks = () => setTimeout(() => {
-        this.getAvailableBooks();
         this.getRelatedBooks();
         return this.subscribeToChanges();
     }, 100);
@@ -57,18 +69,35 @@ export class DataProviderStore {
         } catch {}
     }
 
-    private getAvailableBooks = async () => {
-        const allBooks = await getAllBooks();
+    private getRelatedBooks = async () => {
+        this.start = 0;
+        this.relatedBooks = [];
+        this.disabledScroll = false;
+        await this.fetchRelatedBooks();
+    }
+
+    public fetchRelatedBooks = async () => {
+        const relatedCars = await getRelatedBooks(
+            this.search,
+            this.bookFilter,
+            this.start,
+            PAGINATION_COUNT);
+
         runInAction(() => {
-            this.allBooks = allBooks;
+            this.start += PAGINATION_COUNT;
+            this.disabledScroll = relatedCars.length < PAGINATION_COUNT;
+            this.relatedBooks.push(...relatedCars);
         });
     }
 
-    private getRelatedBooks = async () => {
-        const relatedBooks = await getRelatedBooks();
-        runInAction(() => {
-            this.relatedBooks = relatedBooks;
-        });
+    public setSearch = (search: string) => {
+        this.search = search;
+        this.getRelatedBooks();
+    }
+
+    public setBookFilter = (isBooked: boolean | null) => {
+        this.bookFilter = isBooked;
+        this.getRelatedBooks();
     }
 
     private handleCreateChange = (book: Book) => {

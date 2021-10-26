@@ -19,7 +19,6 @@ import { forwardRef, useContext, useEffect } from "react";
 import { withDataProvider, WithDataProvider } from "../../../../infrastructure";
 import CloseIcon from "@mui/icons-material/CloseSharp";
 import CheckIcon from "@mui/icons-material/CheckSharp";
-import UploadIcon from "@mui/icons-material/UploadSharp";
 import CameraIcon from "@mui/icons-material/CameraAltSharp";
 import DeleteIcon from "@mui/icons-material/DeleteOutlineSharp";
 import { Book } from "../../../../accessors/types";
@@ -27,7 +26,6 @@ import styles from "./book-edit.module.scss";
 import { BookEditContext } from "./book-edit-store";
 import { observer } from "mobx-react";
 import {ByteImage, ConfirmationDialog} from "../../../../components";
-import {IonCard} from "@ionic/react";
 
 interface Props extends WithDataProvider {
     initialBook: Book | null;
