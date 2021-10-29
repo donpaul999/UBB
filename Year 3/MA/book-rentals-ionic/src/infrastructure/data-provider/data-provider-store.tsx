@@ -10,6 +10,7 @@ import {
 import { Book } from "../../accessors/types";
 import { addToList, removeFromList, updateInList } from "../../shared/array-helpers";
 import {networkStatusStore} from "../network-status/network-status-store";
+import OfflineBookAccessor from "../../accessors/book-accessor-offline";
 
 const PAGINATION_COUNT = 4;
 
@@ -103,6 +104,8 @@ export class DataProviderStore {
     private handleCreateChange = (book: Book) => {
         if (book.userId === authorizedStore.userId) {
             this.relatedBooks = addToList(this.relatedBooks, book);
+            this.addToRelatedBooks(book);
+            OfflineBookAccessor.addBook(book);
         } else {
             this.allBooks = addToList(this.allBooks, book);
         }
@@ -124,6 +127,8 @@ export class DataProviderStore {
 
         if (isRelated) {
             this.relatedBooks = updatedList;
+            this.updateInRelatedBooks(book);
+            OfflineBookAccessor.updateBook(book);
         } else {
             this.allBooks = updatedList;
         }
@@ -141,6 +146,8 @@ export class DataProviderStore {
     private handleDeleteChange = (book: Book) => {
         if (book.userId === authorizedStore.userId) {
             this.relatedBooks = removeFromList(this.relatedBooks, ({ id }) => book.id === id);
+            this.deleteFromRelatedBooks(book);
+            OfflineBookAccessor.deleteBook(book.id);
         } else {
             this.allBooks = removeFromList(this.allBooks, ({ id }) => book.id === id);
         }
@@ -149,6 +156,20 @@ export class DataProviderStore {
             The book&nbsp;<strong>{book.name} by {book.author}</strong>&nbsp;was removed from the list
         </>);
     }
+
+    public updateInRelatedBooks = (book: Book) => {
+        const [updatedList, bookToUpdate] =
+            updateInList(this.relatedBooks, book, ({ id }) => book.id === id);
+        if (!bookToUpdate) {
+            return;
+        }
+        this.relatedBooks = updatedList;
+    }
+
+    public addToRelatedBooks = (book: Book) => this.relatedBooks = addToList(this.relatedBooks, book);
+
+    public deleteFromRelatedBooks = (book: Book) =>
+        this.relatedBooks = removeFromList(this.relatedBooks, ({ id }) => book.id === id);
 }
 
 export const dataProviderStore = new DataProviderStore();

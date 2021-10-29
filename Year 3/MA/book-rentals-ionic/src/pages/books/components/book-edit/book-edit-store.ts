@@ -8,6 +8,7 @@ import {
   } from "@capacitor/camera";
 import { addBook, deleteBook, updateBook } from "../../../../accessors/book-accessor";
 import {AuthenticationStorage, toastServiceStore} from "../../../../infrastructure";
+import {dataProviderStore} from "../../../../infrastructure/data-provider/data-provider-store";
 
 export class BookEditStore {
     public book: Book = EMPTY_BOOK;
@@ -55,6 +56,10 @@ export class BookEditStore {
             if (online) {
                 toastServiceStore.showSuccess("Operation successful!");
             } else {
+                const saveMethod = this.isAdd ? dataProviderStore.addToRelatedBooks :
+                    dataProviderStore.updateInRelatedBooks;
+
+                saveMethod(this.book);
                 toastServiceStore.showWarning("Book saved to local storage!");
             }
         } catch {
@@ -84,6 +89,7 @@ export class BookEditStore {
             if (online) {
                 toastServiceStore.showSuccess("Operation successful!");
             } else {
+                dataProviderStore.deleteFromRelatedBooks(this.book);
                 toastServiceStore.showWarning("Book removed in local storage!");
             }
         } catch {
