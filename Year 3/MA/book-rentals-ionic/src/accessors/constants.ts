@@ -6,6 +6,7 @@ export const PORT = 5000;
 
 export const API_PATH_AUTHENTICATE = "authenticate";
 export const API_PATH_BOOKS = "books";
+export const API_PATH_LIBRARY_LOCATION = "LibraryLocation";
 
 export const BASE_URL_WITHOUT_PROTOCOL = `://${BASE_URL}:${PORT}/api/`;
 

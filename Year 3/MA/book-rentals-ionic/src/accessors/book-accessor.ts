@@ -36,11 +36,9 @@ export const updateBook = async (book: Book) => {
 
 export const deleteBook = async (bookId: number) => {
     if (isOnline()) {
-        console.log("online del!");
         await OnlineBookAccessor.deleteBook(bookId);
         return true;
     }
-    console.log("offline del!");
 
     await SyncStorage.queueDelete(bookId);
     await OfflineBookAccessor.deleteBook(bookId);

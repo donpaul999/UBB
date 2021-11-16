@@ -4,14 +4,16 @@ using BookABook;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookABook.Migrations
 {
     [DbContext(typeof(BookABookContext))]
-    partial class BookABookContextModelSnapshot : ModelSnapshot
+    [Migration("20211116094420_initial_3")]
+    partial class initial_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

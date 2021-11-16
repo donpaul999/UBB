@@ -57,3 +57,8 @@ export interface IdMap {
     from: number;
     to: number;
 }
+
+export interface LibraryLocation {
+    latitude: number;
+    longitude: number;
+}
