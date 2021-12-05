@@ -81,7 +81,7 @@ namespace BookABook.Services
                 .AsNoTracking()
                 .FirstOrDefault();
             
-            if (initialBook == null || initialBook.UserId != bookUpdate.UserId)
+            if (initialBook == null)
                 return null;
 
             context.Books.Update(bookUpdate);
