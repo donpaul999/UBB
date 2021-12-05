@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QlTYvlStyjAWogfyQRIct8ipTpFICHt7TqIQl4dp1NZJTiQbmkC8BGHyVSvjYOZeS40jZaWy7q3HROA2a7KGqw==",
+  "dgSpecHash": "4Zi81rMiCO4rlUpTcc73vFPPSdqjFAuQtG9XmErDKBURmimHZThp9k8jMCCw5MQEI5tVmOeSTbAr79g4jgH34g==",
   "success": true,
   "projectFilePath": "/Users/paulcolta/Desktop/GitHub/UBB/Year 3/MA/BookRentals/BookABook.csproj",
   "expectedPackageFiles": [
     "/Users/paulcolta/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/Users/paulcolta/.nuget/packages/microsoft.aspnet.http.extensions/1.0.0-rc1-final/microsoft.aspnet.http.extensions.1.0.0-rc1-final.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
@@ -150,9 +151,19 @@
     "/Users/paulcolta/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/system.xml.xmldocument/4.3.0/system.xml.xmldocument.4.3.0.nupkg.sha512",
     "/Users/paulcolta/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "/Users/paulcolta/.nuget/packages/microsoft.netcore.app.host.osx-x64/5.0.9/microsoft.netcore.app.host.osx-x64.5.0.9.nupkg.sha512"
+    "/Users/paulcolta/.nuget/packages/microsoft.netcore.app.host.osx-x64/5.0.12/microsoft.netcore.app.host.osx-x64.5.0.12.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Http.Extensions 1.0.0-rc1-final' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Http.Extensions",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

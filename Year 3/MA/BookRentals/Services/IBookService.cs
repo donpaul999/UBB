@@ -17,6 +17,8 @@ namespace BookABook.Services
         Book Update(Book book);
 
         Book Delete(int id);
+
+        Book GetBook(int id);
         
         List<IdMap> MapChanges(List<Change<Book>> carChanges);
     }

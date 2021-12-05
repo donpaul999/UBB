@@ -72,13 +72,14 @@ namespace BookABook.Services
 
         public Book Update(Book bookUpdate)
         {
+
+            if (bookUpdate.UserId == Guid.Empty)
+                bookUpdate.UserId = httpContextAccessor.GetUserId();
+            
             var initialBook = context.Books
                 .Where(book => book.Id == bookUpdate.Id)
                 .AsNoTracking()
                 .FirstOrDefault();
-            
-            if (bookUpdate.UserId == Guid.Empty)
-                bookUpdate.UserId = httpContextAccessor.GetUserId();
             
             if (initialBook == null || initialBook.UserId != bookUpdate.UserId)
                 return null;
@@ -100,6 +101,17 @@ namespace BookABook.Services
             context.Remove(book);
             context.SaveChanges();
             
+            return book;
+        }
+        
+        public Book GetBook(int id)
+        {
+            var book = context.Books.Find(id);
+            var userId = httpContextAccessor.GetUserId();
+
+            if (book == null || book.UserId != userId)
+                return null;
+
             return book;
         }
         

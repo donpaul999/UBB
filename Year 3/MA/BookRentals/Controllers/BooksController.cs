@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BookABook.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,8 +42,9 @@ namespace BookABook.Controllers
         [HttpPut]
         public IActionResult UpdateBook(Book book)
         {
+            Console.WriteLine(book);
             var updatedBook = bookService.Update(book.AttachUserId(this));
-
+            
             if (updatedBook == null) return NotFound();
 
             broadcastHandler.Broadcast(ChangeType.Update, updatedBook);
@@ -54,6 +56,12 @@ namespace BookABook.Controllers
         public IActionResult GetAllBooks()
         {
             return Ok(bookService.GetAll());
+        }
+        
+        [HttpGet("{id}")]
+        public IActionResult GetBook(int id)
+        {
+            return Ok(bookService.GetBook(id));
         }
 
         [HttpGet("available")]

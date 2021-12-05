@@ -94,6 +94,7 @@ namespace BookABook.Controllers
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = token.ValidTo
             });
+            
         }
     }
 }
