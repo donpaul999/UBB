@@ -42,7 +42,7 @@ class BookListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.v(TAG, "onBindViewHolder $position")
         val book = books[position]
-        holder.textView.text = book.id.toString() + ". \"" + book.name + "\" by " + book.author + "\n Published on: " + book.publishDate + if (book.isBooked == "true") " It isn't available" else " It is available"
+        holder.textView.text = book.id.toString() + ". \"" + book.name + "\" by " + book.author + "\n Published on: " + book.publishDate + if (book.isBooked == "true") "\n It isn't available" else "\n It is available"
         holder.itemView.tag = book
         holder.itemView.setOnClickListener(onBookClick)
     }

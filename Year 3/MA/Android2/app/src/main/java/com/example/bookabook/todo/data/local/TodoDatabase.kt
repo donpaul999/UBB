@@ -28,7 +28,7 @@ abstract class TodoDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     TodoDatabase::class.java,
-                    "todo_db"
+                    "ma_android"
                 )
                     .addCallback(WordDatabaseCallback(scope))
                     .build()
