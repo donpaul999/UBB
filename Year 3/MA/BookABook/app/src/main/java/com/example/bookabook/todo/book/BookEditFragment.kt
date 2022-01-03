@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.bookabook.R
 import com.example.bookabook.core.TAG
 import com.example.bookabook.databinding.FragmentItemEditBinding
 import java.text.SimpleDateFormat
@@ -72,6 +74,7 @@ class BookEditFragment : Fragment() {
                         cal.get(Calendar.MONTH),
                         cal.get(Calendar.DAY_OF_MONTH)).show()
                 }
+                view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.milkshake));
             }
 
         })

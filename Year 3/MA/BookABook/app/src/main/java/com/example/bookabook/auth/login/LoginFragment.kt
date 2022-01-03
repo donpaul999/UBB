@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookabook.R
 import com.example.bookabook.core.Result
 import com.example.bookabook.core.TAG
-import com.example.bookabook.databinding.FragmentItemListBinding
 import com.example.bookabook.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
